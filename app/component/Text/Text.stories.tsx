@@ -1,11 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import Text from "../index";
-import { centeredLayout, sizeOptions, weightOptions } from "./storyConfig";
+import Text from "./index";
+
+const sizeOptions = [
+  "xs",
+  "sm",
+  "md",
+  "lg",
+  "xl",
+  "display-xs",
+  "display-sm",
+  "display-md",
+  "display-lg",
+  "display-xl",
+  "display-2xl",
+] as const;
+
+const weightOptions = ["regular", "medium", "semibold", "bold"] as const;
 
 const meta = {
   title: "Components/Text",
   component: Text,
-  parameters: centeredLayout,
   argTypes: {
     text: {
       control: "text",
