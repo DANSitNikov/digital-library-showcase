@@ -1,70 +1,52 @@
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+import type { Metadata } from "next";
+// import { useTranslations } from "next-intl";
+import Search from "@/app/component/Search";
 import styles from "../page.module.css";
 
+type LocalePageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+const metadataByLocale: Record<
+  "de" | "en" | "it",
+  { description: string; title: string }
+> = {
+  de: {
+    description: "Suche und entdecke Buecher aus OpenLibrary.",
+    title: "Digitale Bibliothek",
+  },
+  en: {
+    description: "Search and explore books from OpenLibrary.",
+    title: "Digital Library",
+  },
+  it: {
+    description: "Cerca ed esplora libri da OpenLibrary.",
+    title: "Biblioteca Digitale",
+  },
+};
+
+export const generateMetadata = async ({
+  params,
+}: LocalePageProps): Promise<Metadata> => {
+  const { locale } = await params;
+  const selected =
+    metadataByLocale[(locale as keyof typeof metadataByLocale) ?? "en"] ??
+    metadataByLocale.en;
+
+  return {
+    description: selected.description,
+    title: selected.title,
+  };
+};
+
 export default function Home() {
-  const t = useTranslations("HomePage");
+  // const t = useTranslations("HomePage");
 
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Image
-          alt="Next.js logo"
-          className={styles.logo}
-          height={20}
-          priority
-          src="/next.svg"
-          width={100}
-        />
-        <div className={styles.intro}>
-          <h1>{t("title")}</h1>
-          <p>
-            {t.rich("description", {
-              learning: (chunks) => (
-                <a
-                  href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {chunks}
-                </a>
-              ),
-              templates: (chunks) => (
-                <a
-                  href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {chunks}
-                </a>
-              ),
-            })}
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <Image
-              alt="Vercel logomark"
-              className={styles.logo}
-              height={16}
-              src="/vercel.svg"
-              width={16}
-            />
-            {t("deployNow")}
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {t("documentation")}
-          </a>
+        <div style={{ marginTop: "2rem", width: "100%" }}>
+          <Search />
         </div>
       </main>
     </div>
