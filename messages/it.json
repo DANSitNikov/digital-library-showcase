@@ -1,0 +1,10 @@
+{
+  "HomePage": {
+    "title": "Per iniziare, modifica il file page.tsx.",
+    "description": "Cerchi un punto di partenza o altre istruzioni? Vai su <templates>Template</templates> oppure nel centro <learning>Learning</learning>.",
+    "templates": "Template",
+    "learning": "Learning",
+    "deployNow": "Distribuisci ora",
+    "documentation": "Documentazione"
+  }
+}
