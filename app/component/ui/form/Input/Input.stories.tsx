@@ -18,7 +18,7 @@ const typeOptions = [
 ];
 type InputStoryArgs = Omit<ComponentProps<typeof Input>, "name">;
 const inputSchema = z.object({
-  value: z.string().min(1, "Value is required").email("Enter a valid email"),
+  value: z.string().min(1, "Name is required"),
 });
 type InputFormValues = z.infer<typeof inputSchema>;
 
@@ -31,7 +31,9 @@ const InputPlayground = (args: InputStoryArgs) => {
 
   return (
     <FormProvider {...methods}>
-      <Input {...args} name="value" />
+      <div style={{ maxWidth: "28rem" }}>
+        <Input {...args} name="value" />
+      </div>
     </FormProvider>
   );
 };

@@ -1,18 +1,20 @@
+import clsx from "clsx";
 import { useId } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useController } from "react-hook-form";
 import type { FieldPath, FieldValues } from "react-hook-form";
 import Text from "../../Text";
-import type { TextWeight } from "../../Text";
+import type { TextSize, TextWeight } from "../../Text";
 import Error from "../Error";
+import styles from "./Input.module.scss";
 
 export type InputSize = "sm" | "md" | "lg" | "xl";
-const inputSizeToTextSize = {
+const inputSizeToTextSize: Record<InputSize, TextSize> = {
   lg: "text-lg",
   md: "text-base",
   sm: "text-sm",
   xl: "text-xl",
-} as const;
+};
 
 export type InputProps = Omit<
   ComponentPropsWithRef<"input">,
@@ -36,30 +38,25 @@ const Input = ({
   error,
   label,
   name,
+  className,
   size = "md",
   type = "text",
   weight = "regular",
   ...rest
 }: InputProps) => {
   const { field, fieldState } = useController({ name });
-  const {
-    name: fieldName,
-    onBlur: fieldOnBlur,
-    onChange: fieldOnChange,
-    ref: fieldRef,
-    value: fieldValue,
-  } = field;
   const inputId = useId();
   const resolvedError = error ?? fieldState.error?.message;
   const errorId = resolvedError ? `${inputId}-error` : undefined;
+  const hasError = Boolean(resolvedError);
 
   return (
-    <div>
+    <div className={styles.root}>
       <Text
+        className={styles.label}
         component="label"
         htmlFor={inputId}
         size="text-sm"
-        style={{ display: "block" }}
         weight="medium"
       >
         {label}
@@ -70,14 +67,16 @@ const Input = ({
         aria-invalid={Boolean(resolvedError) || undefined}
         component="input"
         id={inputId}
-        onBlur={fieldOnBlur}
-        name={fieldName}
-        onChange={fieldOnChange}
-        ref={fieldRef}
+        className={clsx(
+          styles.field,
+          styles[size],
+          hasError && styles.invalid,
+          className,
+        )}
         size={inputSizeToTextSize[size]}
         type={type}
-        value={fieldValue ?? ""}
         weight={weight}
+        {...field}
       />
       <Error id={errorId} message={resolvedError} />
     </div>

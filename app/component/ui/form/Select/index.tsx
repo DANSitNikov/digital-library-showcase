@@ -52,19 +52,12 @@ const Select = ({
   ...rest
 }: SelectProps) => {
   const { field, fieldState } = useController({ name });
-  const {
-    name: fieldName,
-    onBlur: fieldOnBlur,
-    onChange: fieldOnChange,
-    ref: fieldRef,
-    value: fieldValue,
-  } = field;
   const selectId = useId();
   const resolvedError = error ?? fieldState.error?.message;
   const errorId = resolvedError ? `${selectId}-error` : undefined;
   const isNumericOptions = typeof options[0]?.value === "number";
   const handleChange: ComponentPropsWithRef<"select">["onChange"] = (event) => {
-    fieldOnChange(
+    field.onChange(
       isNumericOptions ? Number(event.target.value) : event.target.value,
     );
   };
@@ -86,12 +79,10 @@ const Select = ({
         aria-invalid={Boolean(resolvedError) || undefined}
         component="select"
         id={selectId}
-        name={fieldName}
-        onBlur={fieldOnBlur}
+        {...field}
         onChange={handleChange}
-        ref={fieldRef}
         size={selectSizeToTextSize[size]}
-        value={fieldValue != null ? String(fieldValue) : ""}
+        value={field.value != null ? String(field.value) : ""}
         weight={weight}
       >
         {options.map((option) => (
