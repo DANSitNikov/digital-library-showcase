@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import Text from "./index";
+import TextSkeleton from "./TextSkeleton";
 
 const sizeOptions = [
   "text-xs",
@@ -63,4 +64,30 @@ export const Playground: Story = {
     size: "text-xl",
     weight: "bold",
   },
+};
+
+export const Skeleton: Story = {
+  args: {
+    component: "p",
+    size: "text-base",
+  },
+  argTypes: {
+    component: {
+      control: false,
+      table: { disable: true },
+    },
+    text: {
+      control: false,
+      table: { disable: true },
+    },
+    weight: {
+      control: false,
+      table: { disable: true },
+    },
+  },
+  render: ({ size }) => (
+    <div style={{ maxWidth: "20rem", padding: "0.5rem" }}>
+      <TextSkeleton size={size} />
+    </div>
+  ),
 };

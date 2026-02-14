@@ -4,6 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Input from "./index";
+import InputSkeleton from "./InputSkeleton";
 
 const sizeOptions = ["sm", "md", "lg", "xl"];
 const weightOptions = ["regular", "medium", "semibold", "bold"];
@@ -77,4 +78,38 @@ type Story = StoryObj<InputStoryArgs>;
 
 export const Playground: Story = {
   render: (args) => <InputPlayground {...args} />,
+};
+
+export const Skeleton: Story = {
+  argTypes: {
+    disabled: {
+      control: false,
+      table: { disable: true },
+    },
+    error: {
+      control: false,
+      table: { disable: true },
+    },
+    label: {
+      control: false,
+      table: { disable: true },
+    },
+    placeholder: {
+      control: false,
+      table: { disable: true },
+    },
+    type: {
+      control: false,
+      table: { disable: true },
+    },
+    weight: {
+      control: false,
+      table: { disable: true },
+    },
+  },
+  render: ({ size }) => (
+    <div style={{ maxWidth: "28rem" }}>
+      <InputSkeleton size={size} />
+    </div>
+  ),
 };
