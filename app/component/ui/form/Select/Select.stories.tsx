@@ -6,8 +6,8 @@ import { z } from "zod";
 import Select from "./index";
 import type { SelectOption } from "./index";
 
-const sizeOptions = ["sm", "md", "lg", "xl"] as const;
-const weightOptions = ["regular", "medium", "semibold", "bold"] as const;
+const sizeOptions = ["sm", "md", "lg", "xl"];
+const weightOptions = ["regular", "medium", "semibold", "bold"];
 const selectOptions: SelectOption[] = [
   { id: "en", label: "English", value: "en" },
   { id: "it", label: "Italiano", value: "it" },

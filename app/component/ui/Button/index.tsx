@@ -1,45 +1,54 @@
+import clsx from "clsx";
 import type { ComponentPropsWithRef, ReactNode } from "react";
 import Text from "../Text";
-import type { TextWeight } from "../Text";
+import type { TextSize, TextWeight } from "../Text";
+import styles from "./Button.module.scss";
 
 export type ButtonSize = "sm" | "md" | "lg" | "xl";
-const buttonSizeToTextSize = {
+const buttonSizeToTextSize: Record<ButtonSize, TextSize> = {
   lg: "text-lg",
   md: "text-base",
   sm: "text-sm",
   xl: "text-xl",
-} as const;
+};
 
 export type ButtonProps = ComponentPropsWithRef<"button"> & {
   children: ReactNode;
   size?: ButtonSize;
   weight?: TextWeight;
-  loading?: boolean;
+  fullWidth?: boolean;
 };
 
 const Button = ({
   children,
+  className,
   disabled,
-  loading,
+  fullWidth = false,
   ref,
   size = "md",
   weight = "semibold",
   type = "button",
   ...rest
 }: ButtonProps) => {
-  const isDisabled = disabled || loading;
+  const resolvedClassName = clsx(
+    styles.button,
+    styles[size],
+    fullWidth && styles.fullWidth,
+    className,
+  );
 
   return (
     <Text
+      className={resolvedClassName}
       component="button"
-      disabled={isDisabled}
+      disabled={disabled}
       ref={ref}
       size={buttonSizeToTextSize[size]}
       weight={weight}
       type={type}
       {...rest}
     >
-      {loading ? "Loading..." : children}
+      {children}
     </Text>
   );
 };

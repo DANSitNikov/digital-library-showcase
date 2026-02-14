@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import type { ComponentProps } from "react";
 import Button from "./index";
 
-const sizeOptions = ["sm", "md", "lg", "xl"] as const;
-const weightOptions = ["regular", "medium", "semibold", "bold"] as const;
+const sizeOptions = ["sm", "md", "lg", "xl"];
+const weightOptions = ["regular", "medium", "semibold", "bold"];
 type ButtonStoryArgs = ComponentProps<typeof Button> & { text?: string };
 
 const meta = {
@@ -34,8 +34,8 @@ const meta = {
     text: "Button",
     size: "md",
     weight: "semibold",
-    loading: false,
     disabled: false,
+    fullWidth: false,
   },
 } satisfies Meta<ButtonStoryArgs>;
 

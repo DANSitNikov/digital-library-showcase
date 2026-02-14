@@ -13,9 +13,9 @@ const sizeOptions = [
   "text-5xl",
   "text-6xl",
   "text-7xl",
-] as const;
+];
 
-const weightOptions = ["regular", "medium", "semibold", "bold"] as const;
+const weightOptions = ["regular", "medium", "semibold", "bold"];
 
 const meta = {
   title: "Components/Text",
