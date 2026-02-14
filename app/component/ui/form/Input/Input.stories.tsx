@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Input from "./index";
 
-const sizeOptions = ["sm", "md", "lg", "xl"] as const;
-const weightOptions = ["regular", "medium", "semibold", "bold"] as const;
+const sizeOptions = ["sm", "md", "lg", "xl"];
+const weightOptions = ["regular", "medium", "semibold", "bold"];
 const typeOptions = [
   "text",
   "email",
@@ -15,7 +15,7 @@ const typeOptions = [
   "tel",
   "url",
   "number",
-] as const;
+];
 type InputStoryArgs = Omit<ComponentProps<typeof Input>, "name">;
 const inputSchema = z.object({
   value: z.string().min(1, "Value is required").email("Enter a valid email"),
