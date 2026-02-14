@@ -16,7 +16,7 @@ export const useGetBooks = ({
 }: UseGetBooksParams = {}) => {
   return useQuery({
     enabled,
-    queryFn: ({ signal }) => fetchBooks({ limit, q, signal }),
-    queryKey: ["books", q, limit],
+    queryFn: ({ signal }) => fetchBooks({ limit: 50, q, signal }),
+    queryKey: ["books", q],
   });
 };

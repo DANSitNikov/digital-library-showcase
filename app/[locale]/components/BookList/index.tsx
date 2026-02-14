@@ -1,62 +1,26 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { useLocale } from "next-intl";
-import { z } from "zod";
-import BookCard from "../BookCard";
-import Input from "../../ui/form/Input";
-import Text from "../../ui/Text";
-import { useDebounce } from "@/app/hooks/useDebounce";
+import BookCard from "@/app/[locale]/components/BookCard";
+import Text from "@/app/component/ui/Text";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
 
-type SearchFormValues = {
+type BookListProps = {
   query: string;
 };
 
-const searchSchema = z.object({
-  query: z.string().trim().min(3, "Enter at least 3 characters"),
-});
-
-const Search = () => {
+const BookList = ({ query }: BookListProps) => {
   const locale = useLocale();
-  const methods = useForm<SearchFormValues>({
-    defaultValues: {
-      query: "programming",
-    },
-    mode: "onChange",
-    resolver: zodResolver(searchSchema),
-  });
-
-  const query = useWatch({
-    control: methods.control,
-    name: "query",
-  });
-  const debouncedQuery = useDebounce(query ?? "", 350).trim();
-
   const { data, error, isError, isFetching, isLoading } = useGetBooks({
-    enabled: methods.formState.isValid && debouncedQuery.length > 0,
+    enabled: query.length > 0,
     limit: 50,
-    q: debouncedQuery,
+    q: query,
   });
 
   const books = data?.docs ?? [];
 
   return (
-    <section>
-      <Text component="h2" size="text-2xl" weight="bold">
-        Book Search
-      </Text>
-      <FormProvider {...methods}>
-        <div style={{ marginTop: "1rem" }}>
-          <Input
-            label="Search books"
-            name="query"
-            placeholder="Try: programming, design patterns, architecture..."
-          />
-        </div>
-      </FormProvider>
-
+    <>
       <div style={{ marginTop: "1rem" }}>
         {isLoading || isFetching ? (
           <Text component="p">Loading books...</Text>
@@ -96,8 +60,8 @@ const Search = () => {
           );
         })}
       </div>
-    </section>
+    </>
   );
 };
 
-export default Search;
+export default BookList;
