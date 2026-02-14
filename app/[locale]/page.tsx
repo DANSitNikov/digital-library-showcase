@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 // import { useTranslations } from "next-intl";
-import Search from "@/app/component/Search";
+import LocaleSelect from "@/app/component/app/LocaleSelect";
+import Search from "@/app/component/app/Search";
+import type { AppLocale } from "@/i18n/locales";
 import styles from "../page.module.scss";
 
 type LocalePageProps = {
   params: Promise<{ locale: string }>;
 };
 
-const metadataByLocale: Record<
-  "de" | "en" | "it",
-  { description: string; title: string }
-> = {
+const metadataByLocale: Record<AppLocale, { description: string; title: string }> = {
   de: {
     description: "Suche und entdecke Buecher aus OpenLibrary.",
     title: "Digitale Bibliothek",
@@ -45,6 +44,9 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <div style={{ width: "100%" }}>
+          <LocaleSelect />
+        </div>
         <div style={{ marginTop: "2rem", width: "100%" }}>
           <Search />
         </div>

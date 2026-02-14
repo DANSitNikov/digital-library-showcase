@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import Text from "@/app/component/Text";
+import Text from "@/app/component/ui/Text";
 import { env } from "@/lib/env";
 
 type WorkResponse = {

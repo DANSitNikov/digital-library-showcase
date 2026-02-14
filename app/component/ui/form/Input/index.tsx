@@ -2,8 +2,9 @@ import { useId } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useController } from "react-hook-form";
 import type { FieldPath, FieldValues } from "react-hook-form";
-import Text from "../Text";
-import type { TextWeight } from "../Text";
+import Text from "../../Text";
+import type { TextWeight } from "../../Text";
+import Error from "../Error";
 
 export type InputSize = "sm" | "md" | "lg" | "xl";
 const inputSizeToTextSize = {
@@ -78,11 +79,7 @@ const Input = ({
         value={fieldValue ?? ""}
         weight={weight}
       />
-      {resolvedError ? (
-        <Text component="p" id={errorId} size="text-sm" weight="medium">
-          {resolvedError}
-        </Text>
-      ) : null}
+      <Error id={errorId} message={resolvedError} />
     </div>
   );
 };
