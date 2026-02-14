@@ -1,4 +1,5 @@
 import Text from "../../Text";
+import styles from "./Error.module.scss";
 
 export type ErrorProps = {
   id?: string;
@@ -12,10 +13,10 @@ const Error = ({ id, message }: ErrorProps) => {
 
   return (
     <Text
+      className={styles.error}
       component="p"
       id={id}
       size="text-sm"
-      style={{ color: "var(--color-red-strong)" }}
       weight="medium"
     >
       {message}

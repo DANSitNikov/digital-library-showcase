@@ -79,10 +79,3 @@ type Story = StoryObj<SelectStoryArgs>;
 export const Playground: Story = {
   render: (args) => <SelectPlayground {...args} />,
 };
-
-export const Disabled: Story = {
-  render: (args) => <SelectPlayground {...args} />,
-  args: {
-    disabled: true,
-  },
-};
