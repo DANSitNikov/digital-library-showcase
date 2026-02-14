@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/nextjs-vite";
 import { createElement } from "react";
 import { Geist } from "next/font/google";
-import "../app/globals.css";
+import "../app/globals.scss";
 
 const geistSans = Geist({
   weight: ["400", "500", "600", "700"],

@@ -44,7 +44,7 @@ const Search = () => {
 
   return (
     <section>
-      <Text component="h2" size="display-xs" weight="bold">
+      <Text component="h2" size="text-2xl" weight="bold">
         Book Search
       </Text>
       <FormProvider {...methods}>

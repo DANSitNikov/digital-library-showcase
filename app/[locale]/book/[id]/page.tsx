@@ -87,13 +87,18 @@ const BookPage = async ({ params }: BookPageProps) => {
           width={240}
         />
         <section>
-          <Text component="h1" size="display-sm" weight="bold">
+          <Text component="h1" size="text-3xl" weight="bold">
             {work.title}
           </Text>
-          <Text component="p" size="md" style={{ marginTop: "1rem" }}>
+          <Text component="p" size="text-base" style={{ marginTop: "1rem" }}>
             {getDescription(work.description)}
           </Text>
-          <Text component="p" size="sm" style={{ marginTop: "1rem" }} weight="medium">
+          <Text
+            component="p"
+            size="text-sm"
+            style={{ marginTop: "1rem" }}
+            weight="medium"
+          >
             {work.subjects?.slice(0, 6).join(", ") || "No subjects available."}
           </Text>
         </section>

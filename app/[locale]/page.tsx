@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 // import { useTranslations } from "next-intl";
 import Search from "@/app/component/Search";
-import styles from "../page.module.css";
+import styles from "../page.module.scss";
 
 type LocalePageProps = {
   params: Promise<{ locale: string }>;
