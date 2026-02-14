@@ -39,6 +39,7 @@ const Input = ({
   label,
   name,
   className,
+  disabled,
   size = "md",
   type = "text",
   weight = "regular",
@@ -77,6 +78,7 @@ const Input = ({
         type={type}
         weight={weight}
         {...field}
+        disabled={disabled}
       />
       <Error id={errorId} message={resolvedError} />
     </div>

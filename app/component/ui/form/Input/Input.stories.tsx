@@ -31,9 +31,9 @@ const InputPlayground = (args: InputStoryArgs) => {
 
   return (
     <FormProvider {...methods}>
-      <div style={{ maxWidth: "28rem" }}>
+      <form style={{ maxWidth: "28rem" }}>
         <Input {...args} name="value" />
-      </div>
+      </form>
     </FormProvider>
   );
 };
