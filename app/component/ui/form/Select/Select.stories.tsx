@@ -5,6 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import Select from "./index";
 import type { SelectOption } from "./index";
+import SelectSkeleton from "./SelectSkeleton";
 
 const sizeOptions = ["sm", "md", "lg", "xl"];
 const weightOptions = ["regular", "medium", "semibold", "bold"];
@@ -78,4 +79,34 @@ type Story = StoryObj<SelectStoryArgs>;
 
 export const Playground: Story = {
   render: (args) => <SelectPlayground {...args} />,
+};
+
+export const Skeleton: Story = {
+  argTypes: {
+    disabled: {
+      control: false,
+      table: { disable: true },
+    },
+    error: {
+      control: false,
+      table: { disable: true },
+    },
+    label: {
+      control: false,
+      table: { disable: true },
+    },
+    options: {
+      control: false,
+      table: { disable: true },
+    },
+    weight: {
+      control: false,
+      table: { disable: true },
+    },
+  },
+  render: ({ size }) => (
+    <div style={{ maxWidth: "28rem" }}>
+      <SelectSkeleton size={size} />
+    </div>
+  ),
 };

@@ -41,6 +41,20 @@ const textSizeInRem: Record<TextSize, string> = {
   "text-7xl": "4.5rem",
 };
 
+const textLineHeightInRem: Record<TextSize, string> = {
+  "text-2xl": "2rem",
+  "text-3xl": "2.25rem",
+  "text-4xl": "2.5rem",
+  "text-5xl": "3rem",
+  "text-6xl": "3.75rem",
+  "text-7xl": "4.5rem",
+  "text-base": "1.5rem",
+  "text-lg": "1.75rem",
+  "text-sm": "1.25rem",
+  "text-xl": "1.75rem",
+  "text-xs": "1rem",
+};
+
 const textWeightValue: Record<TextWeight, number> = {
   regular: 400,
   medium: 500,
@@ -67,6 +81,7 @@ const Text = <C extends ElementType>({
       style: {
         ...style,
         fontSize: textSizeInRem[size],
+        lineHeight: textLineHeightInRem[size],
         fontWeight: textWeightValue[weight],
       },
     },

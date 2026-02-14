@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import type { ComponentProps } from "react";
 import Button from "./index";
+import ButtonSkeleton from "./ButtonSkeleton";
 
 const sizeOptions = ["sm", "md", "lg", "xl"];
 const weightOptions = ["regular", "medium", "semibold", "bold"];
@@ -50,5 +51,31 @@ export const Playground: Story = {
   ),
   args: {
     text: "Button",
+  },
+};
+
+export const Skeleton: Story = {
+  argTypes: {
+    disabled: {
+      control: false,
+      table: { disable: true },
+    },
+    text: {
+      control: false,
+      table: { disable: true },
+    },
+    weight: {
+      control: false,
+      table: { disable: true },
+    },
+  },
+  render: ({ fullWidth, size }) => (
+    <div style={{ maxWidth: "20rem" }}>
+      <ButtonSkeleton fullWidth={fullWidth} size={size} />
+    </div>
+  ),
+  args: {
+    fullWidth: false,
+    size: "md",
   },
 };
