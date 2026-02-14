@@ -41,7 +41,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
   return (
     <NextIntlClientProvider messages={messages}>
       <div className={styles.page}>
-        <header className={styles.siteHeader}>
+        <header className={styles.siteHeader} data-layout-header>
           <div className={styles.headerInner}>
             <Text
               className={styles.title}
@@ -57,7 +57,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
           </div>
         </header>
         <main className={styles.siteMain}>{children}</main>
-        <footer className={styles.siteFooter}>
+        <footer className={styles.siteFooter} data-layout-footer>
           <div className={styles.footerInner}>
             <Text component="p" size="text-sm">
               {footerByLocale[locale as AppLocale] ?? footerByLocale.en}
