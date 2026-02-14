@@ -33,7 +33,9 @@ const SelectPlayground = (args: SelectStoryArgs) => {
 
   return (
     <FormProvider {...methods}>
-      <Select {...args} name="value" />
+      <div style={{ maxWidth: "28rem" }}>
+        <Select {...args} name="value" />
+      </div>
     </FormProvider>
   );
 };
