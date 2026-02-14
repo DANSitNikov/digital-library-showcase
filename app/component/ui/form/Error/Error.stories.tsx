@@ -6,7 +6,8 @@ const meta = {
   component: Error,
   argTypes: {
     id: {
-      control: "text",
+      control: false,
+      table: { disable: true },
     },
     message: {
       control: "text",
@@ -22,9 +23,3 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
-
-export const Empty: Story = {
-  args: {
-    message: "",
-  },
-};
