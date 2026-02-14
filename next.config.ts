@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        hostname: "covers.openlibrary.org",
+        protocol: "https",
+      },
+    ],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

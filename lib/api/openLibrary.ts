@@ -1,3 +1,5 @@
+import { env } from "@/lib/env";
+
 export type OpenLibraryBook = {
   key: string;
   title: string;
@@ -20,9 +22,6 @@ type FetchBooksParams = {
   signal?: AbortSignal;
 };
 
-const OPEN_LIBRARY_API_URL =
-  process.env.NEXT_PUBLIC_OPEN_LIBRARY_API_URL ?? "https://openlibrary.org";
-
 export const fetchBooks = async ({
   limit = 50,
   q = "programming",
@@ -34,7 +33,7 @@ export const fetchBooks = async ({
   });
 
   const response = await fetch(
-    `${OPEN_LIBRARY_API_URL}/search.json?${params.toString()}`,
+    `${env.NEXT_PUBLIC_OPEN_LIBRARY_API_URL}/search.json?${params.toString()}`,
     {
       method: "GET",
       signal,
