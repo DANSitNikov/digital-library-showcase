@@ -1,12 +1,14 @@
 "use client";
 
+import clsx from "clsx";
 import { useId } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useController } from "react-hook-form";
 import type { FieldPath, FieldValues } from "react-hook-form";
 import Text from "../../Text";
-import type { TextWeight } from "../../Text";
+import type { TextSize, TextWeight } from "../../Text";
 import Error from "../Error";
+import styles from "./Select.module.scss";
 
 export type SelectOption = {
   id: string;
@@ -15,12 +17,12 @@ export type SelectOption = {
 };
 
 export type SelectSize = "sm" | "md" | "lg" | "xl";
-const selectSizeToTextSize = {
+const selectSizeToTextSize: Record<SelectSize, TextSize> = {
   lg: "text-lg",
   md: "text-base",
   sm: "text-sm",
   xl: "text-xl",
-} as const;
+};
 
 export type SelectProps = Omit<
   ComponentPropsWithRef<"select">,
@@ -47,6 +49,8 @@ const Select = ({
   label,
   name,
   options,
+  className,
+  disabled,
   size = "md",
   weight = "regular",
   ...rest
@@ -55,6 +59,7 @@ const Select = ({
   const selectId = useId();
   const resolvedError = error ?? fieldState.error?.message;
   const errorId = resolvedError ? `${selectId}-error` : undefined;
+  const hasError = Boolean(resolvedError);
   const isNumericOptions = typeof options[0]?.value === "number";
   const handleChange: ComponentPropsWithRef<"select">["onChange"] = (event) => {
     field.onChange(
@@ -63,12 +68,12 @@ const Select = ({
   };
 
   return (
-    <div>
+    <div className={styles.root}>
       <Text
+        className={styles.label}
         component="label"
         htmlFor={selectId}
         size="text-sm"
-        style={{ display: "block" }}
         weight="medium"
       >
         {label}
@@ -80,10 +85,17 @@ const Select = ({
         component="select"
         id={selectId}
         {...field}
+        className={clsx(
+          styles.field,
+          styles[size],
+          hasError && styles.invalid,
+          className,
+        )}
         onChange={handleChange}
         size={selectSizeToTextSize[size]}
         value={field.value != null ? String(field.value) : ""}
         weight={weight}
+        disabled={disabled}
       >
         {options.map((option) => (
           <option key={option.id} value={option.value}>

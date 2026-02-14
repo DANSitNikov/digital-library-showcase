@@ -33,9 +33,9 @@ const SelectPlayground = (args: SelectStoryArgs) => {
 
   return (
     <FormProvider {...methods}>
-      <div style={{ maxWidth: "28rem" }}>
+      <form style={{ maxWidth: "28rem" }}>
         <Select {...args} name="value" />
-      </div>
+      </form>
     </FormProvider>
   );
 };
@@ -48,6 +48,10 @@ const meta = {
       control: "text",
     },
     error: {
+      control: false,
+      table: { disable: true },
+    },
+    options: {
       control: false,
       table: { disable: true },
     },
@@ -74,4 +78,11 @@ type Story = StoryObj<SelectStoryArgs>;
 
 export const Playground: Story = {
   render: (args) => <SelectPlayground {...args} />,
+};
+
+export const Disabled: Story = {
+  render: (args) => <SelectPlayground {...args} />,
+  args: {
+    disabled: true,
+  },
 };
