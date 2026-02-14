@@ -4,9 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { useLocale } from "next-intl";
 import { z } from "zod";
-import Card from "../Card";
-import Input from "../Input";
-import Text from "../Text";
+import BookCard from "../BookCard";
+import Input from "../../ui/form/Input";
+import Text from "../../ui/Text";
 import { useDebounce } from "@/app/hooks/useDebounce";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
 
@@ -83,7 +83,7 @@ const Search = () => {
             : "/window.svg";
 
           return (
-            <Card
+            <BookCard
               author={book.author_name?.[0] ?? "Unknown author"}
               blurb={`First published: ${book.first_publish_year ?? "Unknown"}`}
               coverImage={coverImage}

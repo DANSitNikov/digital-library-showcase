@@ -37,7 +37,7 @@ const InputPlayground = (args: InputStoryArgs) => {
 };
 
 const meta = {
-  title: "Components/Input",
+  title: "Components/Form/Input",
   component: InputPlayground,
   argTypes: {
     label: {

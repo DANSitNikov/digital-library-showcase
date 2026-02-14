@@ -3,7 +3,7 @@ import type { ImageProps } from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
-export type CardProps = {
+export type BookCardProps = {
   title: string;
   author: string;
   blurb: string;
@@ -13,7 +13,7 @@ export type CardProps = {
   href?: string;
 };
 
-const Card = ({
+const BookCard = ({
   author,
   blurb,
   coverImage,
@@ -21,7 +21,7 @@ const Card = ({
   href = "/books/mock-book",
   pages,
   title,
-}: CardProps) => {
+}: BookCardProps) => {
   return (
     <Link href={href}>
       <article>
@@ -43,4 +43,4 @@ const Card = ({
   );
 };
 
-export default memo(Card);
+export default memo(BookCard);
