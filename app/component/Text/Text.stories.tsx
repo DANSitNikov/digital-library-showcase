@@ -2,17 +2,17 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import Text from "./index";
 
 const sizeOptions = [
-  "xs",
-  "sm",
-  "md",
-  "lg",
-  "xl",
-  "display-xs",
-  "display-sm",
-  "display-md",
-  "display-lg",
-  "display-xl",
-  "display-2xl",
+  "text-xs",
+  "text-sm",
+  "text-base",
+  "text-lg",
+  "text-xl",
+  "text-2xl",
+  "text-3xl",
+  "text-4xl",
+  "text-5xl",
+  "text-6xl",
+  "text-7xl",
 ] as const;
 
 const weightOptions = ["regular", "medium", "semibold", "bold"] as const;
@@ -47,7 +47,7 @@ const meta = {
   },
   args: {
     text: "Readable text sample",
-    size: "md",
+    size: "text-base",
     weight: "regular",
   },
 } satisfies Meta<typeof Text>;
@@ -60,7 +60,7 @@ export const Playground: Story = {
   args: {
     component: "p",
     text: "Readable text samplddde",
-    size: "xl",
+    size: "text-xl",
     weight: "bold",
   },
 };

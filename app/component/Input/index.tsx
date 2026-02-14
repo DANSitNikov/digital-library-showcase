@@ -6,6 +6,12 @@ import Text from "../Text";
 import type { TextWeight } from "../Text";
 
 export type InputSize = "sm" | "md" | "lg" | "xl";
+const inputSizeToTextSize = {
+  lg: "text-lg",
+  md: "text-base",
+  sm: "text-sm",
+  xl: "text-xl",
+} as const;
 
 export type InputProps = Omit<
   ComponentPropsWithRef<"input">,
@@ -51,7 +57,7 @@ const Input = ({
       <Text
         component="label"
         htmlFor={inputId}
-        size="sm"
+        size="text-sm"
         style={{ display: "block" }}
         weight="medium"
       >
@@ -67,13 +73,13 @@ const Input = ({
         name={fieldName}
         onChange={fieldOnChange}
         ref={fieldRef}
-        size={size}
+        size={inputSizeToTextSize[size]}
         type={type}
         value={fieldValue ?? ""}
         weight={weight}
       />
       {resolvedError ? (
-        <Text component="p" id={errorId} size="sm" weight="medium">
+        <Text component="p" id={errorId} size="text-sm" weight="medium">
           {resolvedError}
         </Text>
       ) : null}

@@ -1,13 +1,13 @@
 .page {
-  --background: #fafafa;
-  --foreground: #fff;
+  --background: var(--color-white-soft);
+  --foreground: var(--color-white);
 
-  --text-primary: #000;
-  --text-secondary: #666;
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-black-muted);
 
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
+  --button-primary-hover: var(--color-black-soft);
+  --button-secondary-hover: var(--color-white-strong);
+  --button-secondary-border: var(--color-white-strong);
 
   display: flex;
   min-height: 100vh;
@@ -26,7 +26,7 @@
   align-items: flex-start;
   justify-content: space-between;
   background-color: var(--foreground);
-  padding: 120px 60px;
+  padding: var(--space-24) var(--space-12);
 }
 
 .intro {
@@ -34,7 +34,7 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 24px;
+  gap: var(--space-6);
 }
 
 .intro h1 {
@@ -65,7 +65,7 @@
   flex-direction: row;
   width: 100%;
   max-width: 440px;
-  gap: 16px;
+  gap: var(--space-4);
   font-size: 14px;
 }
 
@@ -73,8 +73,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
+  height: var(--space-10);
+  padding: var(--space-0) var(--space-4);
   border-radius: 128px;
   border: 1px solid transparent;
   transition: 0.2s;
@@ -86,7 +86,7 @@
 a.primary {
   background: var(--text-primary);
   color: var(--background);
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 a.secondary {
@@ -108,11 +108,11 @@ a.secondary {
 
 @media (max-width: 600px) {
   .main {
-    padding: 48px 24px;
+    padding: var(--space-12) var(--space-6);
   }
 
   .intro {
-    gap: 16px;
+    gap: var(--space-4);
   }
 
   .intro h1 {
