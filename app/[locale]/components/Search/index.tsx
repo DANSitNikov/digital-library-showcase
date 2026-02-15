@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
-import Input from "@/app/component/ui/form/Input";
+import Input from "@/app/component/form/Input";
 import { useDebounce } from "@/app/hooks/useDebounce";
 
 type SearchFormValues = {

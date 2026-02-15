@@ -5,6 +5,7 @@ import { useId } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useController } from "react-hook-form";
 import type { FieldPath, FieldValues } from "react-hook-form";
+import KeyboardArrowDown from "../../icons/KeyboardArrowDown";
 import Text from "../../Text";
 import type { TextSize, TextWeight } from "../../Text";
 import Error from "../Error";
@@ -37,6 +38,7 @@ export type SelectProps = Omit<
   | "value"
 > & {
   label: string;
+  labelMode?: "aria" | "visible";
   name: FieldPath<FieldValues>;
   options: SelectOption[];
   size?: SelectSize;
@@ -47,6 +49,7 @@ export type SelectProps = Omit<
 const Select = ({
   error,
   label,
+  labelMode = "visible",
   name,
   options,
   className,
@@ -66,43 +69,56 @@ const Select = ({
       isNumericOptions ? Number(event.target.value) : event.target.value,
     );
   };
+  const handleBlur: ComponentPropsWithRef<"select">["onBlur"] = () => {
+    field.onBlur();
+  };
 
   return (
     <div className={styles.root}>
-      <Text
-        className={styles.label}
-        component="label"
-        htmlFor={selectId}
-        size="text-sm"
-        weight="medium"
-      >
-        {label}
-      </Text>
-      <Text
-        {...rest}
-        aria-describedby={errorId}
-        aria-invalid={Boolean(resolvedError) || undefined}
-        component="select"
-        id={selectId}
-        {...field}
-        className={clsx(
-          styles.field,
-          styles[size],
-          hasError && styles.invalid,
-          className,
-        )}
-        onChange={handleChange}
-        size={selectSizeToTextSize[size]}
-        value={field.value != null ? String(field.value) : ""}
-        weight={weight}
-        disabled={disabled}
-      >
-        {options.map((option) => (
-          <option key={option.id} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </Text>
+      {labelMode === "visible" ? (
+        <Text
+          className={styles.label}
+          component="label"
+          htmlFor={selectId}
+          size="text-sm"
+          weight="medium"
+        >
+          {label}
+        </Text>
+      ) : null}
+      <div className={styles.fieldWrap}>
+        <Text
+          {...rest}
+          aria-describedby={errorId}
+          aria-label={labelMode === "aria" ? label : undefined}
+          aria-invalid={Boolean(resolvedError) || undefined}
+          component="select"
+          id={selectId}
+          {...field}
+          className={clsx(
+            styles.field,
+            styles[size],
+            hasError && styles.invalid,
+            className,
+          )}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          size={selectSizeToTextSize[size]}
+          value={field.value != null ? String(field.value) : ""}
+          weight={weight}
+          disabled={disabled}
+        >
+          {options.map((option) => (
+            <option key={option.id} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </Text>
+        <KeyboardArrowDown
+          className={clsx(styles.icon, disabled && styles.iconDisabled)}
+          size={20}
+        />
+      </div>
       <Error id={errorId} message={resolvedError} />
     </div>
   );

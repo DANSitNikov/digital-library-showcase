@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import Skeleton from "../../../ui/Skeleton";
+import Skeleton from "../../Skeleton";
 import type { InputSize } from "./index";
 
 export type InputSkeletonProps = {

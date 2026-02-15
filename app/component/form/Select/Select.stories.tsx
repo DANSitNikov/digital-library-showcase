@@ -9,6 +9,7 @@ import SelectSkeleton from "./SelectSkeleton";
 
 const sizeOptions = ["sm", "md", "lg", "xl"];
 const weightOptions = ["regular", "medium", "semibold", "bold"];
+const labelModeOptions = ["visible", "aria"];
 const selectOptions: SelectOption[] = [
   { id: "en", label: "English", value: "en" },
   { id: "it", label: "Italiano", value: "it" },
@@ -60,6 +61,10 @@ const meta = {
       control: "select",
       options: sizeOptions,
     },
+    labelMode: {
+      control: "select",
+      options: labelModeOptions,
+    },
     weight: {
       control: "select",
       options: weightOptions,
@@ -68,6 +73,7 @@ const meta = {
   args: {
     label: "Language",
     options: selectOptions,
+    labelMode: "visible",
     size: "md",
     weight: "regular",
     disabled: false,
@@ -92,6 +98,10 @@ export const Skeleton: Story = {
       table: { disable: true },
     },
     label: {
+      control: false,
+      table: { disable: true },
+    },
+    labelMode: {
       control: false,
       table: { disable: true },
     },

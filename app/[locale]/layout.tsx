@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import Text from "@/app/component/ui/Text";
+import Text from "@/app/component/Text";
 import LocaleSelect from "@/app/[locale]/components/LocaleSelect";
 import type { AppLocale } from "@/i18n/locales";
 import { routing } from "@/i18n/routing";

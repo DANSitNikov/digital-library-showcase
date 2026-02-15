@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";
 import { List } from "react-window";
 import type { RowComponentProps } from "react-window";
 import BookCard from "@/app/[locale]/components/BookCard";
-import Text from "@/app/component/ui/Text";
+import Text from "@/app/component/Text";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
 
 type BookDoc = {

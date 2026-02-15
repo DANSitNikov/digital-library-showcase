@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
-import Select from "@/app/component/ui/form/Select";
+import Select from "@/app/component/form/Select";
 import type { AppLocale } from "@/i18n/locales";
 import { localeLabels, locales } from "@/i18n/locales";
 
@@ -70,7 +70,13 @@ const LocaleSelect = () => {
 
   return (
     <FormProvider {...form}>
-      <Select label="Language" name="locale" options={localeOptions} size="sm" />
+      <Select
+        label="Language"
+        labelMode="aria"
+        name="locale"
+        options={localeOptions}
+        size="sm"
+      />
     </FormProvider>
   );
 };

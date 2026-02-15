@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { ImageProps } from "next/image";
 import Link from "next/link";
 import { memo } from "react";
-import Text from "@/app/component/ui/Text";
+import Text from "@/app/component/Text";
 import styles from "./BookCard.module.scss";
 
 export type BookCardProps = {
