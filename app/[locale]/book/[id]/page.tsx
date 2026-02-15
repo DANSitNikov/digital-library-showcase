@@ -28,8 +28,7 @@ export const generateMetadata = async ({
 
   const info = book.volumeInfo;
   const description = info.description ?? "No description available.";
-  const ogImage =
-    getGoogleBooksCover(info.imageLinks, "medium") ?? "/window.svg";
+  const ogImage = getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
   const ogTitle = `${info.title} | Digital Library`;
 
   return {
@@ -57,8 +56,7 @@ const BookPage = async ({ params }: BookPageProps) => {
   }
 
   const info = book.volumeInfo;
-  const coverImage =
-    getGoogleBooksCover(info.imageLinks, "medium") ?? "/window.svg";
+  const coverImage = getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
   const categories =
     info.categories?.slice(0, 6).join(", ") ?? "No categories available.";
   const authors = info.authors?.join(", ") ?? "Unknown author";

@@ -29,8 +29,7 @@ const BookRow = ({
 }: RowComponentProps<BookRowProps>) => {
   const book = books[index];
   const info = book.volumeInfo;
-  const coverImage =
-    getGoogleBooksCover(info.imageLinks, "small") ?? "/window.svg";
+  const coverImage = getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
 
   return (
     <div style={{ ...style, display: "flex", justifyContent: "center" }}>
