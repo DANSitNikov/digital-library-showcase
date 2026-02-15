@@ -19,7 +19,7 @@ type BookListProps = {
   listHeight: number;
 };
 
-const ROW_HEIGHT = 440;
+const ROW_HEIGHT = 212;
 
 const BookRow = ({
   index,
@@ -33,7 +33,7 @@ const BookRow = ({
 
   return (
     <div style={{ ...style, display: "flex", justifyContent: "center" }}>
-      <div style={{ paddingBottom: "1rem", width: "min(100%, 340px)" }}>
+      <div style={{ paddingBottom: "1rem", width: "100%" }}>
         <BookCard
           author={info.authors?.[0] ?? "Unknown author"}
           blurb={`Published: ${info.publishedDate ?? "Unknown"}`}

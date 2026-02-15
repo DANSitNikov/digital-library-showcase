@@ -33,7 +33,7 @@ const BookCard = ({
             className={styles.cover}
             fill
             loading="lazy"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            sizes="(max-width: 600px) 120px, 180px"
             src={coverImage}
           />
         </div>
@@ -42,16 +42,16 @@ const BookCard = ({
             {title}
           </Text>
           <Text className={styles.author} component="p" size="text-sm" weight="medium">
-            {author}
+            Author: {author}
           </Text>
           <Text className={styles.meta} component="p" size="text-sm">
             {blurb}
           </Text>
           <Text className={styles.meta} component="p" size="text-sm">
-            {genre}
+            Genre: {genre}
           </Text>
           <Text className={styles.meta} component="p" size="text-sm">
-            {pages} pages
+            Number of pages: {pages}
           </Text>
         </div>
       </article>
