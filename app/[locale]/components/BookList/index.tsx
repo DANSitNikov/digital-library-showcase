@@ -6,19 +6,11 @@ import type { RowComponentProps } from "react-window";
 import BookCard from "@/app/[locale]/components/BookCard";
 import Text from "@/app/component/Text";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
-
-type BookDoc = {
-  key: string;
-  title: string;
-  cover_i?: number;
-  author_name?: string[];
-  first_publish_year?: number;
-  subject?: string[];
-  number_of_pages_median?: number;
-};
+import type { GoogleBooksVolume } from "@/lib/api/googleBooks";
+import { getGoogleBooksCover } from "@/lib/api/googleBooks";
 
 type BookRowProps = {
-  books: BookDoc[];
+  books: GoogleBooksVolume[];
   locale: string;
 };
 
@@ -36,22 +28,20 @@ const BookRow = ({
   locale,
 }: RowComponentProps<BookRowProps>) => {
   const book = books[index];
-  const bookId = book.key.split("/").filter(Boolean).pop() ?? "unknown";
-  const coverImage = book.cover_i
-    ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
-    : "/window.svg";
+  const info = book.volumeInfo;
+  const coverImage = getGoogleBooksCover(info.imageLinks) ?? "/window.svg";
 
   return (
     <div style={{ ...style, display: "flex", justifyContent: "center" }}>
       <div style={{ paddingBottom: "1rem", width: "min(100%, 340px)" }}>
         <BookCard
-          author={book.author_name?.[0] ?? "Unknown author"}
-          blurb={`First published: ${book.first_publish_year ?? "Unknown"}`}
+          author={info.authors?.[0] ?? "Unknown author"}
+          blurb={`Published: ${info.publishedDate ?? "Unknown"}`}
           coverImage={coverImage}
-          genre={book.subject?.[0] ?? "General"}
-          href={`/${locale}/book/${bookId}`}
-          pages={book.number_of_pages_median ?? 0}
-          title={book.title}
+          genre={info.categories?.[0] ?? "General"}
+          href={`/${locale}/book/${book.id}`}
+          pages={info.pageCount ?? 0}
+          title={info.title}
         />
       </div>
     </div>
@@ -60,13 +50,33 @@ const BookRow = ({
 
 const BookList = ({ listHeight, query }: BookListProps) => {
   const locale = useLocale();
-  const { data, error, isError, isFetching, isLoading } = useGetBooks({
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isError,
+    isFetching,
+    isFetchingNextPage,
+    isLoading,
+  } = useGetBooks({
     enabled: query.length > 0,
-    limit: 50,
     q: query,
   });
 
-  const books = (data?.docs ?? []) as BookDoc[];
+  const books =
+    data?.pages.flatMap((page) => page.items ?? []) ?? [];
+  const handleRowsRendered = (
+    visibleRows: { startIndex: number; stopIndex: number },
+  ) => {
+    const isNearBottom = visibleRows.stopIndex >= books.length - 5;
+
+    if (!isNearBottom || !hasNextPage || isFetchingNextPage) {
+      return;
+    }
+
+    void fetchNextPage();
+  };
 
   return (
     <>
@@ -83,6 +93,7 @@ const BookList = ({ listHeight, query }: BookListProps) => {
 
       <List
         defaultHeight={listHeight}
+        onRowsRendered={handleRowsRendered}
         overscanCount={3}
         rowComponent={BookRow}
         rowCount={books.length}
@@ -90,6 +101,13 @@ const BookList = ({ listHeight, query }: BookListProps) => {
         rowProps={{ books, locale }}
         style={{ height: listHeight, marginTop: "1rem" }}
       />
+      {isFetchingNextPage ? (
+        <div style={{ marginTop: "0.5rem" }}>
+          <Text component="p" size="text-sm">
+            Loading more books...
+          </Text>
+        </div>
+      ) : null}
     </>
   );
 };

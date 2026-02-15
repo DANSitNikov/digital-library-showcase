@@ -8,9 +8,23 @@ const requireEnv = (value: string | undefined, name: string) => {
   return value;
 };
 
+const requireUrlEnv = (value: string | undefined, name: string) => {
+  const raw = requireEnv(value, name);
+
+  try {
+    new URL(raw);
+  } catch {
+    throw new Error(
+      `Invalid URL in environment variable: ${name}. Received "${raw}".`,
+    );
+  }
+
+  return raw;
+};
+
 export const env = {
-  NEXT_PUBLIC_OPEN_LIBRARY_API_URL: requireEnv(
-    process.env.NEXT_PUBLIC_OPEN_LIBRARY_API_URL,
-    "NEXT_PUBLIC_OPEN_LIBRARY_API_URL",
+  NEXT_PUBLIC_GOOGLE_BOOKS_API_URL: requireUrlEnv(
+    process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_URL,
+    "NEXT_PUBLIC_GOOGLE_BOOKS_API_URL",
   ),
 };

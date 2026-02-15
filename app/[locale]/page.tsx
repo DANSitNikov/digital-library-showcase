@@ -9,15 +9,15 @@ type LocalePageProps = {
 
 const metadataByLocale: Record<AppLocale, { description: string; title: string }> = {
   de: {
-    description: "Suche und entdecke Buecher aus OpenLibrary.",
+    description: "Suche und entdecke Buecher aus Google Books.",
     title: "Digitale Bibliothek",
   },
   en: {
-    description: "Search and explore books from OpenLibrary.",
+    description: "Search and explore books from Google Books.",
     title: "Digital Library",
   },
   it: {
-    description: "Cerca ed esplora libri da OpenLibrary.",
+    description: "Cerca ed esplora libri da Google Books.",
     title: "Biblioteca Digitale",
   },
 };

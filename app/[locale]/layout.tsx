@@ -23,9 +23,9 @@ const titleByLocale: Record<AppLocale, string> = {
   it: "Biblioteca Digitale",
 };
 const footerByLocale: Record<AppLocale, string> = {
-  de: "Datenquelle: OpenLibrary",
-  en: "Data source: OpenLibrary",
-  it: "Fonte dati: OpenLibrary",
+  de: "Datenquelle: Google Books",
+  en: "Data source: Google Books",
+  it: "Fonte dati: Google Books",
 };
 
 const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
