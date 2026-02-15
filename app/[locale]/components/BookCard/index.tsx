@@ -12,16 +12,22 @@ export type BookCardProps = {
   coverImage: ImageProps["src"];
   pages: number;
   genre: string;
+  authorLabel?: string;
+  genreLabel?: string;
+  pagesLabel?: string;
   href?: string;
 };
 
 const BookCard = ({
   author,
+  authorLabel = "Author",
   blurb,
   coverImage,
   genre,
+  genreLabel = "Genre",
   href = "/books/mock-book",
   pages,
+  pagesLabel = "Number of pages",
   title,
 }: BookCardProps) => {
   return (
@@ -38,20 +44,30 @@ const BookCard = ({
           />
         </div>
         <div className={styles.content}>
-          <Text className={styles.title} component="h3" size="text-lg" weight="bold">
+          <Text
+            className={styles.title}
+            component="h3"
+            size="text-lg"
+            weight="bold"
+          >
             {title}
           </Text>
-          <Text className={styles.author} component="p" size="text-sm" weight="medium">
-            Author: {author}
+          <Text
+            className={styles.author}
+            component="p"
+            size="text-sm"
+            weight="medium"
+          >
+            {authorLabel}: {author}
           </Text>
           <Text className={styles.meta} component="p" size="text-sm">
             {blurb}
           </Text>
           <Text className={styles.meta} component="p" size="text-sm">
-            Genre: {genre}
+            {genreLabel}: {genre}
           </Text>
           <Text className={styles.meta} component="p" size="text-sm">
-            Number of pages: {pages}
+            {pagesLabel}: {pages}
           </Text>
         </div>
       </article>

@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
@@ -11,22 +12,23 @@ type SearchFormValues = {
   query: string;
 };
 
-const searchSchema = z.object({
-  query: z.string().trim().min(3, "Enter at least 3 characters"),
-});
-
 type SearchProps = {
   query: string;
   onQueryChange: (query: string) => void;
 };
 
 const Search = ({ onQueryChange, query }: SearchProps) => {
+  const tSearch = useTranslations("HomePage.search");
   const methods = useForm<SearchFormValues>({
     defaultValues: {
       query,
     },
     mode: "onChange",
-    resolver: zodResolver(searchSchema),
+    resolver: zodResolver(
+      z.object({
+        query: z.string().trim().min(3, tSearch("validationMin")),
+      }),
+    ),
   });
 
   const formQuery = useWatch({
@@ -45,9 +47,9 @@ const Search = ({ onQueryChange, query }: SearchProps) => {
       <FormProvider {...methods}>
         <form>
           <Input
-            label="Search books"
+            label={tSearch("label")}
             name="query"
-            placeholder="Try: programming, design patterns, architecture..."
+            placeholder={tSearch("placeholder")}
           />
         </form>
       </FormProvider>

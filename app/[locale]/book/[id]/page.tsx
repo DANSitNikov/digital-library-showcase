@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Text from "@/app/component/Text";
 import { fetchBookById, getGoogleBooksCover } from "@/lib/api/googleBooks";
@@ -17,19 +18,21 @@ export const revalidate = 3600;
 export const generateMetadata = async ({
   params,
 }: BookPageProps): Promise<Metadata> => {
-  const { id } = await params;
+  const { id, locale } = await params;
+  const tBook = await getTranslations({ locale, namespace: "BookPage" });
   const book = await fetchBookById(id);
 
   if (!book) {
     return {
-      title: "Book not found | Digital Library",
+      title: tBook("metadata.notFoundTitle"),
     };
   }
 
   const info = book.volumeInfo;
-  const description = info.description ?? "No description available.";
-  const ogImage = getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
-  const ogTitle = `${info.title} | Digital Library`;
+  const description = info.description ?? tBook("fallback.noDescription");
+  const ogImage =
+    getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
+  const ogTitle = tBook("metadata.title", { title: info.title });
 
   return {
     description,
@@ -48,7 +51,8 @@ export const generateMetadata = async ({
 };
 
 const BookPage = async ({ params }: BookPageProps) => {
-  const { id } = await params;
+  const { id, locale } = await params;
+  const tBook = await getTranslations({ locale, namespace: "BookPage" });
   const book = await fetchBookById(id);
 
   if (!book) {
@@ -56,14 +60,15 @@ const BookPage = async ({ params }: BookPageProps) => {
   }
 
   const info = book.volumeInfo;
-  const coverImage = getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
+  const coverImage =
+    getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
   const categories =
-    info.categories?.slice(0, 6).join(", ") ?? "No categories available.";
-  const authors = info.authors?.join(", ") ?? "Unknown author";
-  const publisher = info.publisher ?? "Unknown publisher";
-  const publishedDate = info.publishedDate ?? "Unknown";
-  const pageCount = info.pageCount ?? "Unknown";
-  const language = (info.language ?? "Unknown").toUpperCase();
+    info.categories?.slice(0, 6).join(", ") ?? tBook("fallback.noCategories");
+  const authors = info.authors?.join(", ") ?? tBook("fallback.unknownAuthor");
+  const publisher = info.publisher ?? tBook("fallback.unknownPublisher");
+  const publishedDate = info.publishedDate ?? tBook("fallback.unknown");
+  const pageCount = info.pageCount ?? tBook("fallback.unknown");
+  const language = info.language?.toUpperCase() ?? tBook("fallback.unknown");
   const previewLink = info.previewLink;
   const pdfDownloadLink = book.accessInfo?.pdf?.downloadLink;
 
@@ -94,7 +99,7 @@ const BookPage = async ({ params }: BookPageProps) => {
               size="text-sm"
               weight="medium"
             >
-              Author: {authors}
+              {tBook("labels.author")}: {authors}
             </Text>
             <Text
               className={styles.meta}
@@ -102,7 +107,7 @@ const BookPage = async ({ params }: BookPageProps) => {
               size="text-sm"
               weight="medium"
             >
-              Publisher: {publisher}
+              {tBook("labels.publisher")}: {publisher}
             </Text>
             <Text
               className={styles.meta}
@@ -110,7 +115,7 @@ const BookPage = async ({ params }: BookPageProps) => {
               size="text-sm"
               weight="medium"
             >
-              Published date: {publishedDate}
+              {tBook("labels.publishedDate")}: {publishedDate}
             </Text>
             <Text
               className={styles.meta}
@@ -118,7 +123,7 @@ const BookPage = async ({ params }: BookPageProps) => {
               size="text-sm"
               weight="medium"
             >
-              Number of pages: {pageCount}
+              {tBook("labels.pages")}: {pageCount}
             </Text>
             <Text
               className={styles.meta}
@@ -126,10 +131,10 @@ const BookPage = async ({ params }: BookPageProps) => {
               size="text-sm"
               weight="medium"
             >
-              Language: {language}
+              {tBook("labels.language")}: {language}
             </Text>
             <Text className={styles.description} component="p" size="text-base">
-              {info.description ?? "No description available."}
+              {info.description ?? tBook("fallback.noDescription")}
             </Text>
             <Text
               className={styles.meta}
@@ -137,7 +142,7 @@ const BookPage = async ({ params }: BookPageProps) => {
               size="text-sm"
               weight="medium"
             >
-              Genre: {categories}
+              {tBook("labels.genre")}: {categories}
             </Text>
             {previewLink ? (
               <a
@@ -146,7 +151,7 @@ const BookPage = async ({ params }: BookPageProps) => {
                 rel="noreferrer noopener"
                 target="_blank"
               >
-                Preview
+                {tBook("actions.preview")}
               </a>
             ) : null}
             {pdfDownloadLink ? (
@@ -156,7 +161,7 @@ const BookPage = async ({ params }: BookPageProps) => {
                 rel="noreferrer noopener"
                 target="_blank"
               >
-                Download PDF
+                {tBook("actions.downloadPdf")}
               </a>
             ) : null}
           </div>
