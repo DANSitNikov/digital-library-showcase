@@ -53,22 +53,14 @@ const PAGE_SIZE = 20;
 
 export const getGoogleBooksCover = (
   imageLinks?: GoogleBooksImageLinks,
-  size: "medium" | "small" = "medium",
 ): string | undefined => {
   const raw =
-    size === "small"
-      ? (imageLinks?.small ??
-        imageLinks?.smallThumbnail ??
-        imageLinks?.thumbnail ??
-        imageLinks?.medium ??
-        imageLinks?.large ??
-        imageLinks?.extraLarge)
-      : (imageLinks?.medium ??
-        imageLinks?.large ??
-        imageLinks?.extraLarge ??
-        imageLinks?.thumbnail ??
-        imageLinks?.small ??
-        imageLinks?.smallThumbnail);
+    imageLinks?.medium ??
+    imageLinks?.large ??
+    imageLinks?.extraLarge ??
+    imageLinks?.thumbnail ??
+    imageLinks?.small ??
+    imageLinks?.smallThumbnail;
 
   if (!raw) {
     return undefined;

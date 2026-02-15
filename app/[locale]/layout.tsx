@@ -1,10 +1,14 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { notFound } from "next/navigation";
 import Text from "@/app/component/Text";
 import LocaleSelect from "@/app/[locale]/components/LocaleSelect";
-import type { AppLocale } from "@/i18n/locales";
 import { routing } from "@/i18n/routing";
 import styles from "./layout.module.scss";
 
@@ -17,15 +21,18 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-const titleByLocale: Record<AppLocale, string> = {
-  de: "Digitale Bibliothek",
-  en: "Digital Library",
-  it: "Biblioteca Digitale",
-};
-const footerByLocale: Record<AppLocale, string> = {
-  de: "Datenquelle: Google Books",
-  en: "Data source: Google Books",
-  it: "Fonte dati: Google Books",
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> => {
+  const { locale } = await params;
+  const tLayout = await getTranslations({ locale, namespace: "Layout" });
+
+  return {
+    description: tLayout("metadataDescription"),
+    title: tLayout("title"),
+  };
 };
 
 const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
@@ -37,6 +44,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const tLayout = await getTranslations({ locale, namespace: "Layout" });
 
   return (
     <NextIntlClientProvider messages={messages}>
@@ -49,7 +57,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
               size="text-3xl"
               weight="bold"
             >
-              {titleByLocale[locale as AppLocale] ?? titleByLocale.en}
+              {tLayout("title")}
             </Text>
             <div className={styles.localeSelectWrap}>
               <LocaleSelect />
@@ -60,7 +68,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
         <footer className={styles.siteFooter} data-layout-footer>
           <div className={styles.footerInner}>
             <Text component="p" size="text-sm">
-              {footerByLocale[locale as AppLocale] ?? footerByLocale.en}
+              {tLayout("dataSource")}
             </Text>
           </div>
         </footer>

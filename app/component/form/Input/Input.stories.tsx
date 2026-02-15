@@ -24,14 +24,14 @@ const inputSchema = z.object({
 type InputFormValues = z.infer<typeof inputSchema>;
 
 const InputPlayground = (args: InputStoryArgs) => {
-  const methods = useForm<InputFormValues>({
+  const form = useForm<InputFormValues>({
     mode: "onBlur",
     resolver: zodResolver(inputSchema),
     defaultValues: { value: "" },
   });
 
   return (
-    <FormProvider {...methods}>
+    <FormProvider {...form}>
       <form style={{ maxWidth: "28rem" }}>
         <Input {...args} name="value" />
       </form>

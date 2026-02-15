@@ -1,24 +1,19 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import Select from "@/app/component/form/Select";
 import type { AppLocale } from "@/i18n/locales";
-import { localeLabels, locales } from "@/i18n/locales";
-
-const localeOptions = locales.map((locale) => ({
-  id: locale,
-  label: localeLabels[locale],
-  value: locale,
-}));
+import { locales } from "@/i18n/locales";
 
 type LocaleFormValues = {
   locale: AppLocale;
 };
 
 const LocaleSelect = () => {
+  const tLocale = useTranslations("HomePage.locale");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -32,6 +27,12 @@ const LocaleSelect = () => {
     control: form.control,
     name: "locale",
   });
+
+  const localeOptions = locales.map((item) => ({
+    id: item,
+    label: tLocale(`options.${item}`),
+    value: item,
+  }));
 
   const handleLocaleChange = useCallback(
     (nextLocale: AppLocale) => {
@@ -70,13 +71,15 @@ const LocaleSelect = () => {
 
   return (
     <FormProvider {...form}>
-      <Select
-        label="Language"
-        labelMode="aria"
-        name="locale"
-        options={localeOptions}
-        size="sm"
-      />
+      <form>
+        <Select
+          label={tLocale("label")}
+          labelMode="aria"
+          name="locale"
+          options={localeOptions}
+          size="sm"
+        />
+      </form>
     </FormProvider>
   );
 };

@@ -1,0 +1,74 @@
+{
+  "Layout": {
+    "title": "Biblioteca Digitale",
+    "dataSource": "Fonte dati: Google Books",
+    "metadataDescription": "Trova ed esplora libri per titolo, autore, genere e altro."
+  },
+  "HomePage": {
+    "metadata": {
+      "title": "Biblioteca Digitale",
+      "description": "Cerca ed esplora libri da Google Books."
+    },
+    "locale": {
+      "label": "Lingua",
+      "options": {
+        "en": "Inglese",
+        "it": "Italiano",
+        "de": "Tedesco"
+      }
+    },
+    "search": {
+      "label": "Cerca libri",
+      "placeholder": "Harry Potter",
+      "validationMin": "Inserisci almeno 3 caratteri"
+    },
+    "list": {
+      "loading": "Caricamento libri...",
+      "error": "Qualcosa e andato storto",
+      "loadingMore": "Caricamento altri libri...",
+      "published": "Pubblicato: {value}",
+      "unknown": "Sconosciuto",
+      "unknownAuthor": "Autore sconosciuto",
+      "general": "Generale"
+    },
+    "card": {
+      "authorLabel": "Autore",
+      "genreLabel": "Genere",
+      "pagesLabel": "Numero di pagine"
+    }
+  },
+  "ErrorPage": {
+    "bookTitle": "Impossibile caricare questo libro.",
+    "pageTitle": "Impossibile caricare questa pagina.",
+    "retry": "Riprova",
+    "unknownError": "Errore sconosciuto"
+  },
+  "BookPage": {
+    "metadata": {
+      "notFoundTitle": "Libro non trovato | Biblioteca Digitale",
+      "title": "{title} | Biblioteca Digitale"
+    },
+    "labels": {
+      "author": "Autore",
+      "publisher": "Editore",
+      "publishedDate": "Data di pubblicazione",
+      "pages": "Numero di pagine",
+      "language": "Lingua",
+      "genre": "Genere"
+    },
+    "fallback": {
+      "noDescription": "Nessuna descrizione disponibile.",
+      "noCategories": "Nessuna categoria disponibile.",
+      "unknownAuthor": "Autore sconosciuto",
+      "unknownPublisher": "Editore sconosciuto",
+      "unknown": "Sconosciuto"
+    },
+    "actions": {
+      "preview": "Anteprima",
+      "downloadPdf": "Scarica PDF"
+    },
+    "loading": {
+      "details": "Caricamento dettagli del libro..."
+    }
+  }
+}

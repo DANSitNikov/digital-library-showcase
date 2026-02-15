@@ -53,7 +53,6 @@
 
 .title {
   color: var(--color-black);
-  line-height: 1.25;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -67,7 +66,6 @@
 
 .meta {
   color: var(--color-black-muted);
-  line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -87,12 +85,16 @@
 
   .title {
     font-size: 0.875rem !important;
-    line-height: 1.25rem !important;
   }
 
   .author,
   .meta {
     font-size: 0.875rem !important;
+  }
+
+  .title,
+  .author,
+  .meta {
     line-height: 1.25rem !important;
   }
 

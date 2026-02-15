@@ -1,0 +1,74 @@
+{
+  "Layout": {
+    "title": "Digitale Bibliothek",
+    "dataSource": "Datenquelle: Google Books",
+    "metadataDescription": "Finde und entdecke Buecher nach Titel, Autor, Genre und mehr."
+  },
+  "HomePage": {
+    "metadata": {
+      "title": "Digitale Bibliothek",
+      "description": "Suche und entdecke Buecher aus Google Books."
+    },
+    "locale": {
+      "label": "Sprache",
+      "options": {
+        "en": "Englisch",
+        "it": "Italienisch",
+        "de": "Deutsch"
+      }
+    },
+    "search": {
+      "label": "Buecher suchen",
+      "placeholder": "Harry Potter",
+      "validationMin": "Gib mindestens 3 Zeichen ein"
+    },
+    "list": {
+      "loading": "Buecher werden geladen...",
+      "error": "Etwas ist schiefgelaufen",
+      "loadingMore": "Weitere Buecher werden geladen...",
+      "published": "Veroeffentlicht: {value}",
+      "unknown": "Unbekannt",
+      "unknownAuthor": "Unbekannter Autor",
+      "general": "Allgemein"
+    },
+    "card": {
+      "authorLabel": "Autor",
+      "genreLabel": "Genre",
+      "pagesLabel": "Seitenzahl"
+    }
+  },
+  "ErrorPage": {
+    "bookTitle": "Dieses Buch konnte nicht geladen werden.",
+    "pageTitle": "Diese Seite konnte nicht geladen werden.",
+    "retry": "Erneut versuchen",
+    "unknownError": "Unbekannter Fehler"
+  },
+  "BookPage": {
+    "metadata": {
+      "notFoundTitle": "Buch nicht gefunden | Digitale Bibliothek",
+      "title": "{title} | Digitale Bibliothek"
+    },
+    "labels": {
+      "author": "Autor",
+      "publisher": "Verlag",
+      "publishedDate": "Veroeffentlichungsdatum",
+      "pages": "Seitenzahl",
+      "language": "Sprache",
+      "genre": "Genre"
+    },
+    "fallback": {
+      "noDescription": "Keine Beschreibung verfuegbar.",
+      "noCategories": "Keine Kategorien verfuegbar.",
+      "unknownAuthor": "Unbekannter Autor",
+      "unknownPublisher": "Unbekannter Verlag",
+      "unknown": "Unbekannt"
+    },
+    "actions": {
+      "preview": "Vorschau",
+      "downloadPdf": "PDF herunterladen"
+    },
+    "loading": {
+      "details": "Buchdetails werden geladen..."
+    }
+  }
+}

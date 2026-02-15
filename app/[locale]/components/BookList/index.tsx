@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { List } from "react-window";
 import type { RowComponentProps } from "react-window";
 import BookCard from "@/app/[locale]/components/BookCard";
@@ -8,10 +8,17 @@ import Text from "@/app/component/Text";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
 import type { GoogleBooksVolume } from "@/lib/api/googleBooks";
 import { getGoogleBooksCover } from "@/lib/api/googleBooks";
+import styles from "./BookList.module.scss";
 
 type BookRowProps = {
   books: GoogleBooksVolume[];
   locale: string;
+  listCopy: {
+    general: string;
+    publishedPattern: string;
+    unknown: string;
+    unknownAuthor: string;
+  };
 };
 
 type BookListProps = {
@@ -26,20 +33,21 @@ const BookRow = ({
   style,
   books,
   locale,
+  listCopy,
 }: RowComponentProps<BookRowProps>) => {
   const book = books[index];
   const info = book.volumeInfo;
-  const coverImage =
-    getGoogleBooksCover(info.imageLinks, "small") ?? "/window.svg";
+  const coverImage = getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
+  const publishedValue = info.publishedDate ?? listCopy.unknown;
 
   return (
-    <div style={{ ...style, display: "flex", justifyContent: "center" }}>
-      <div style={{ paddingBottom: "1rem", width: "100%" }}>
+    <div className={styles.row} style={style}>
+      <div className={styles.rowInner}>
         <BookCard
-          author={info.authors?.[0] ?? "Unknown author"}
-          blurb={`Published: ${info.publishedDate ?? "Unknown"}`}
+          author={info.authors?.[0] ?? listCopy.unknownAuthor}
+          blurb={listCopy.publishedPattern.replace("{value}", publishedValue)}
           coverImage={coverImage}
-          genre={info.categories?.[0] ?? "General"}
+          genre={info.categories?.[0] ?? listCopy.general}
           href={`/${locale}/book/${book.id}`}
           pages={info.pageCount ?? 0}
           title={info.title}
@@ -51,6 +59,7 @@ const BookRow = ({
 
 const BookList = ({ listHeight, query }: BookListProps) => {
   const locale = useLocale();
+  const tList = useTranslations("HomePage.list");
   const {
     data,
     error,
@@ -64,6 +73,12 @@ const BookList = ({ listHeight, query }: BookListProps) => {
     enabled: query.length > 0,
     q: query,
   });
+  const listCopy = {
+    general: tList("general"),
+    publishedPattern: tList("published", { value: "{value}" }),
+    unknown: tList("unknown"),
+    unknownAuthor: tList("unknownAuthor"),
+  };
 
   const books = data?.pages.flatMap((page) => page.items ?? []) ?? [];
   const handleRowsRendered = (visibleRows: {
@@ -81,13 +96,13 @@ const BookList = ({ listHeight, query }: BookListProps) => {
 
   return (
     <>
-      <div style={{ marginTop: "1rem" }}>
+      <div className={styles.status}>
         {isLoading || isFetching ? (
-          <Text component="p">Loading books...</Text>
+          <Text component="p">{tList("loading")}</Text>
         ) : null}
         {isError ? (
           <Text component="p">
-            {(error as Error)?.message || "Something went wrong"}
+            {(error as Error)?.message || tList("error")}
           </Text>
         ) : null}
       </div>
@@ -99,13 +114,14 @@ const BookList = ({ listHeight, query }: BookListProps) => {
         rowComponent={BookRow}
         rowCount={books.length}
         rowHeight={ROW_HEIGHT}
-        rowProps={{ books, locale }}
-        style={{ height: listHeight, marginTop: "1rem" }}
+        rowProps={{ books, listCopy, locale }}
+        className={styles.list}
+        style={{ height: listHeight }}
       />
       {isFetchingNextPage ? (
-        <div style={{ marginTop: "0.5rem" }}>
+        <div className={styles.loadingMore}>
           <Text component="p" size="text-sm">
-            Loading more books...
+            {tList("loadingMore")}
           </Text>
         </div>
       ) : null}
