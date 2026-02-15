@@ -1,8 +1,8 @@
 import Skeleton from "@/app/component/Skeleton";
 import TextSkeleton from "@/app/component/Text/TextSkeleton";
-import styles from "./page.module.scss";
+import styles from "./[id]/page.module.scss";
 
-const BookLoadingPage = () => {
+const BookSegmentLoadingPage = () => {
   return (
     <main className={styles.main}>
       <div className={styles.layout}>
@@ -34,4 +34,4 @@ const BookLoadingPage = () => {
   );
 };
 
-export default BookLoadingPage;
+export default BookSegmentLoadingPage;

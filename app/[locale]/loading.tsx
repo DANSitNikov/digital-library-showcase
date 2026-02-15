@@ -1,8 +1,17 @@
+import BookCardSkeleton from "@/app/[locale]/components/BookCard/BookCardSkeleton";
+import InputSkeleton from "@/app/component/form/Input/InputSkeleton";
+import styles from "./loading.module.scss";
+
 const LocaleLoadingPage = () => {
   return (
-    <main style={{ margin: "0 auto", maxWidth: "960px", padding: "2rem" }}>
-      <p>Loading page...</p>
-    </main>
+    <section className={styles.content}>
+      <InputSkeleton size="md" />
+      <div className={styles.cards}>
+        <BookCardSkeleton />
+        <BookCardSkeleton />
+        <BookCardSkeleton />
+      </div>
+    </section>
   );
 };
 

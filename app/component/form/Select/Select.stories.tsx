@@ -116,7 +116,7 @@ export const Skeleton: Story = {
   },
   render: ({ size }) => (
     <div style={{ maxWidth: "28rem" }}>
-      <SelectSkeleton size={size} />
+      <SelectSkeleton showLabel={false} size={size} />
     </div>
   ),
 };

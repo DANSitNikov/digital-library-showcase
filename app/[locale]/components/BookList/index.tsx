@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { List } from "react-window";
 import type { RowComponentProps } from "react-window";
 import BookCard from "@/app/[locale]/components/BookCard";
+import BookCardSkeleton from "@/app/[locale]/components/BookCard/BookCardSkeleton";
 import Text from "@/app/component/Text";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
 import type { GoogleBooksVolume } from "@/lib/api/googleBooks";
@@ -37,7 +38,8 @@ const BookRow = ({
 }: RowComponentProps<BookRowProps>) => {
   const book = books[index];
   const info = book.volumeInfo;
-  const coverImage = getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
+  const coverImage =
+    getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
   const publishedValue = info.publishedDate ?? listCopy.unknown;
 
   return (
@@ -81,6 +83,8 @@ const BookList = ({ listHeight, query }: BookListProps) => {
   };
 
   const books = data?.pages.flatMap((page) => page.items ?? []) ?? [];
+  const showInitialSkeletons =
+    !isError && books.length === 0 && (isLoading || isFetching);
   const handleRowsRendered = (visibleRows: {
     startIndex: number;
     stopIndex: number;
@@ -97,27 +101,33 @@ const BookList = ({ listHeight, query }: BookListProps) => {
   return (
     <>
       <div className={styles.status}>
-        {isLoading || isFetching ? (
-          <Text component="p">{tList("loading")}</Text>
-        ) : null}
         {isError ? (
           <Text component="p">
             {(error as Error)?.message || tList("error")}
           </Text>
         ) : null}
       </div>
+      {showInitialSkeletons ? (
+        <div className={styles.skeletons}>
+          <BookCardSkeleton />
+          <BookCardSkeleton />
+          <BookCardSkeleton />
+        </div>
+      ) : null}
 
-      <List
-        defaultHeight={listHeight}
-        onRowsRendered={handleRowsRendered}
-        overscanCount={3}
-        rowComponent={BookRow}
-        rowCount={books.length}
-        rowHeight={ROW_HEIGHT}
-        rowProps={{ books, listCopy, locale }}
-        className={styles.list}
-        style={{ height: listHeight }}
-      />
+      {books.length > 0 ? (
+        <List
+          defaultHeight={listHeight}
+          onRowsRendered={handleRowsRendered}
+          overscanCount={3}
+          rowComponent={BookRow}
+          rowCount={books.length}
+          rowHeight={ROW_HEIGHT}
+          rowProps={{ books, listCopy, locale }}
+          className={styles.list}
+          style={{ height: listHeight }}
+        />
+      ) : null}
       {isFetchingNextPage ? (
         <div className={styles.loadingMore}>
           <Text component="p" size="text-sm">
