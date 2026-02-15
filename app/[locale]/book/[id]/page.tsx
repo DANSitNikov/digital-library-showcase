@@ -133,9 +133,6 @@ const BookPage = async ({ params }: BookPageProps) => {
             >
               {tBook("labels.language")}: {language}
             </Text>
-            <Text className={styles.description} component="p" size="text-base">
-              {info.description ?? tBook("fallback.noDescription")}
-            </Text>
             <Text
               className={styles.meta}
               component="p"
@@ -144,6 +141,13 @@ const BookPage = async ({ params }: BookPageProps) => {
             >
               {tBook("labels.genre")}: {categories}
             </Text>
+          </div>
+        </section>
+        <section className={styles.secondary}>
+          <Text className={styles.description} component="p" size="text-base">
+            {info.description ?? tBook("fallback.noDescription")}
+          </Text>
+          <div className={styles.links}>
             {previewLink ? (
               <a
                 className={styles.link}
@@ -153,6 +157,16 @@ const BookPage = async ({ params }: BookPageProps) => {
               >
                 {tBook("actions.preview")}
               </a>
+            ) : null}
+            {previewLink && pdfDownloadLink ? (
+              <Text
+                aria-hidden="true"
+                className={styles.separator}
+                component="span"
+                size="text-sm"
+              >
+                /
+              </Text>
             ) : null}
             {pdfDownloadLink ? (
               <a

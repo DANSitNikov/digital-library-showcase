@@ -28,6 +28,12 @@ const LocaleSelect = () => {
     name: "locale",
   });
 
+  const localeOptions = locales.map((item) => ({
+    id: item,
+    label: tLocale(`options.${item}`),
+    value: item,
+  }));
+
   const handleLocaleChange = useCallback(
     (nextLocale: AppLocale) => {
       const segments = pathname.split("/");
@@ -62,21 +68,18 @@ const LocaleSelect = () => {
 
     handleLocaleChange(selectedLocale);
   }, [handleLocaleChange, locale, selectedLocale]);
-  const localeOptions = locales.map((item) => ({
-    id: item,
-    label: tLocale(`options.${item}`),
-    value: item,
-  }));
 
   return (
     <FormProvider {...form}>
-      <Select
-        label={tLocale("label")}
-        labelMode="aria"
-        name="locale"
-        options={localeOptions}
-        size="sm"
-      />
+      <form>
+        <Select
+          label={tLocale("label")}
+          labelMode="aria"
+          name="locale"
+          options={localeOptions}
+          size="sm"
+        />
+      </form>
     </FormProvider>
   );
 };

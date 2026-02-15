@@ -25,7 +25,7 @@ const selectSchema = z.object({
 type SelectFormValues = z.infer<typeof selectSchema>;
 
 const SelectPlayground = (args: SelectStoryArgs) => {
-  const methods = useForm<SelectFormValues>({
+  const form = useForm<SelectFormValues>({
     defaultValues: {
       value: "en",
     },
@@ -34,7 +34,7 @@ const SelectPlayground = (args: SelectStoryArgs) => {
   });
 
   return (
-    <FormProvider {...methods}>
+    <FormProvider {...form}>
       <form style={{ maxWidth: "28rem" }}>
         <Select {...args} name="value" />
       </form>

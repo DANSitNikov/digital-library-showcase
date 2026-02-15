@@ -19,7 +19,7 @@ type SearchProps = {
 
 const Search = ({ onQueryChange, query }: SearchProps) => {
   const tSearch = useTranslations("HomePage.search");
-  const methods = useForm<SearchFormValues>({
+  const form = useForm<SearchFormValues>({
     defaultValues: {
       query,
     },
@@ -32,11 +32,11 @@ const Search = ({ onQueryChange, query }: SearchProps) => {
   });
 
   const formQuery = useWatch({
-    control: methods.control,
+    control: form.control,
     name: "query",
   });
   const debouncedQuery = useDebounce(formQuery ?? "", 350).trim();
-  const isValidSearch = methods.formState.isValid && debouncedQuery.length > 0;
+  const isValidSearch = form.formState.isValid && debouncedQuery.length > 0;
 
   useEffect(() => {
     onQueryChange(isValidSearch ? debouncedQuery : "");
@@ -44,7 +44,7 @@ const Search = ({ onQueryChange, query }: SearchProps) => {
 
   return (
     <section>
-      <FormProvider {...methods}>
+      <FormProvider {...form}>
         <form>
           <Input
             label={tSearch("label")}
