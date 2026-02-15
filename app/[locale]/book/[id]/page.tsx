@@ -1,15 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import Text from "@/app/component/ui/Text";
-import { env } from "@/lib/env";
-
-type WorkResponse = {
-  title: string;
-  description?: string | { value?: string };
-  covers?: number[];
-  subjects?: string[];
-};
+import Text from "@/app/component/Text";
+import { fetchBookById, getGoogleBooksCover } from "@/lib/api/googleBooks";
+import styles from "./page.module.scss";
 
 type BookPageProps = {
   params: Promise<{
@@ -20,37 +14,23 @@ type BookPageProps = {
 
 export const revalidate = 3600;
 
-const getDescription = (description: WorkResponse["description"]) => {
-  if (typeof description === "string") {
-    return description;
-  }
-
-  return description?.value ?? "No description available.";
-};
-
-const getWorkById = async (id: string): Promise<WorkResponse> => {
-  const response = await fetch(`${env.NEXT_PUBLIC_OPEN_LIBRARY_API_URL}/works/${id}.json`, {
-    cache: "force-cache",
-  });
-
-  if (!response.ok) {
-    notFound();
-  }
-
-  return (await response.json()) as WorkResponse;
-};
-
 export const generateMetadata = async ({
   params,
 }: BookPageProps): Promise<Metadata> => {
   const { id } = await params;
-  const work = await getWorkById(id);
-  const description = getDescription(work.description);
-  const coverId = work.covers?.[0];
-  const ogImage = coverId
-    ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`
-    : "/window.svg";
-  const ogTitle = `${work.title} | Digital Library`;
+  const book = await fetchBookById(id);
+
+  if (!book) {
+    return {
+      title: "Book not found | Digital Library",
+    };
+  }
+
+  const info = book.volumeInfo;
+  const description = info.description ?? "No description available.";
+  const ogImage =
+    getGoogleBooksCover(info.imageLinks, "medium") ?? "/window.svg";
+  const ogTitle = `${info.title} | Digital Library`;
 
   return {
     description,
@@ -58,7 +38,7 @@ export const generateMetadata = async ({
       description,
       images: [
         {
-          alt: `Cover of ${work.title}`,
+          alt: `Cover of ${info.title}`,
           url: ogImage,
         },
       ],
@@ -70,37 +50,118 @@ export const generateMetadata = async ({
 
 const BookPage = async ({ params }: BookPageProps) => {
   const { id } = await params;
-  const work = await getWorkById(id);
-  const coverId = work.covers?.[0];
-  const coverImage = coverId
-    ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`
-    : "/window.svg";
+  const book = await fetchBookById(id);
+
+  if (!book) {
+    notFound();
+  }
+
+  const info = book.volumeInfo;
+  const coverImage =
+    getGoogleBooksCover(info.imageLinks, "medium") ?? "/window.svg";
+  const categories =
+    info.categories?.slice(0, 6).join(", ") ?? "No categories available.";
+  const authors = info.authors?.join(", ") ?? "Unknown author";
+  const publisher = info.publisher ?? "Unknown publisher";
+  const publishedDate = info.publishedDate ?? "Unknown";
+  const pageCount = info.pageCount ?? "Unknown";
+  const language = (info.language ?? "Unknown").toUpperCase();
+  const previewLink = info.previewLink;
+  const pdfDownloadLink = book.accessInfo?.pdf?.downloadLink;
 
   return (
-    <main style={{ margin: "0 auto", maxWidth: "960px", padding: "2rem" }}>
-      <div style={{ display: "grid", gap: "2rem", gridTemplateColumns: "240px 1fr" }}>
-        <Image
-          alt={`Cover of ${work.title}`}
-          height={360}
-          src={coverImage}
-          style={{ objectFit: "cover" }}
-          width={240}
-        />
+    <main className={styles.main}>
+      <div className={styles.layout}>
+        <div className={styles.coverWrap}>
+          <Image
+            alt={`Cover of ${info.title}`}
+            className={styles.cover}
+            fill
+            src={coverImage}
+          />
+        </div>
         <section>
-          <Text component="h1" size="text-3xl" weight="bold">
-            {work.title}
-          </Text>
-          <Text component="p" size="text-base" style={{ marginTop: "1rem" }}>
-            {getDescription(work.description)}
-          </Text>
-          <Text
-            component="p"
-            size="text-sm"
-            style={{ marginTop: "1rem" }}
-            weight="medium"
-          >
-            {work.subjects?.slice(0, 6).join(", ") || "No subjects available."}
-          </Text>
+          <div className={styles.content}>
+            <Text
+              className={styles.title}
+              component="h1"
+              size="text-3xl"
+              weight="bold"
+            >
+              {info.title}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Author: {authors}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Publisher: {publisher}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Published date: {publishedDate}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Number of pages: {pageCount}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Language: {language}
+            </Text>
+            <Text className={styles.description} component="p" size="text-base">
+              {info.description ?? "No description available."}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Genre: {categories}
+            </Text>
+            {previewLink ? (
+              <a
+                className={styles.link}
+                href={previewLink}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                Preview
+              </a>
+            ) : null}
+            {pdfDownloadLink ? (
+              <a
+                className={styles.link}
+                href={pdfDownloadLink}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                Download PDF
+              </a>
+            ) : null}
+          </div>
         </section>
       </div>
     </main>

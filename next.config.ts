@@ -5,8 +5,20 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "covers.openlibrary.org",
+        hostname: "books.google.com",
         protocol: "https",
+      },
+      {
+        hostname: "books.google.com",
+        protocol: "http",
+      },
+      {
+        hostname: "books.googleusercontent.com",
+        protocol: "https",
+      },
+      {
+        hostname: "books.googleusercontent.com",
+        protocol: "http",
       },
     ],
   },
