@@ -29,7 +29,8 @@ const BookRow = ({
 }: RowComponentProps<BookRowProps>) => {
   const book = books[index];
   const info = book.volumeInfo;
-  const coverImage = getGoogleBooksCover(info.imageLinks) ?? "/window.svg";
+  const coverImage =
+    getGoogleBooksCover(info.imageLinks, "small") ?? "/window.svg";
 
   return (
     <div style={{ ...style, display: "flex", justifyContent: "center" }}>
@@ -64,11 +65,11 @@ const BookList = ({ listHeight, query }: BookListProps) => {
     q: query,
   });
 
-  const books =
-    data?.pages.flatMap((page) => page.items ?? []) ?? [];
-  const handleRowsRendered = (
-    visibleRows: { startIndex: number; stopIndex: number },
-  ) => {
+  const books = data?.pages.flatMap((page) => page.items ?? []) ?? [];
+  const handleRowsRendered = (visibleRows: {
+    startIndex: number;
+    stopIndex: number;
+  }) => {
     const isNearBottom = visibleRows.stopIndex >= books.length - 5;
 
     if (!isNearBottom || !hasNextPage || isFetchingNextPage) {

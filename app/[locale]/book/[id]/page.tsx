@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Text from "@/app/component/Text";
 import { fetchBookById, getGoogleBooksCover } from "@/lib/api/googleBooks";
+import styles from "./page.module.scss";
 
 type BookPageProps = {
   params: Promise<{
@@ -27,7 +28,8 @@ export const generateMetadata = async ({
 
   const info = book.volumeInfo;
   const description = info.description ?? "No description available.";
-  const ogImage = getGoogleBooksCover(info.imageLinks) ?? "/window.svg";
+  const ogImage =
+    getGoogleBooksCover(info.imageLinks, "medium") ?? "/window.svg";
   const ogTitle = `${info.title} | Digital Library`;
 
   return {
@@ -55,33 +57,111 @@ const BookPage = async ({ params }: BookPageProps) => {
   }
 
   const info = book.volumeInfo;
-  const coverImage = getGoogleBooksCover(info.imageLinks) ?? "/window.svg";
+  const coverImage =
+    getGoogleBooksCover(info.imageLinks, "medium") ?? "/window.svg";
+  const categories =
+    info.categories?.slice(0, 6).join(", ") ?? "No categories available.";
+  const authors = info.authors?.join(", ") ?? "Unknown author";
+  const publisher = info.publisher ?? "Unknown publisher";
+  const publishedDate = info.publishedDate ?? "Unknown";
+  const pageCount = info.pageCount ?? "Unknown";
+  const language = (info.language ?? "Unknown").toUpperCase();
+  const previewLink = info.previewLink;
+  const pdfDownloadLink = book.accessInfo?.pdf?.downloadLink;
 
   return (
-    <main style={{ margin: "0 auto", maxWidth: "960px", padding: "2rem" }}>
-      <div style={{ display: "grid", gap: "2rem", gridTemplateColumns: "240px 1fr" }}>
-        <Image
-          alt={`Cover of ${info.title}`}
-          height={360}
-          src={coverImage}
-          style={{ objectFit: "cover" }}
-          width={240}
-        />
+    <main className={styles.main}>
+      <div className={styles.layout}>
+        <div className={styles.coverWrap}>
+          <Image
+            alt={`Cover of ${info.title}`}
+            className={styles.cover}
+            fill
+            src={coverImage}
+          />
+        </div>
         <section>
-          <Text component="h1" size="text-3xl" weight="bold">
-            {info.title}
-          </Text>
-          <Text component="p" size="text-base" style={{ marginTop: "1rem" }}>
-            {info.description ?? "No description available."}
-          </Text>
-          <Text
-            component="p"
-            size="text-sm"
-            style={{ marginTop: "1rem" }}
-            weight="medium"
-          >
-            {info.categories?.slice(0, 6).join(", ") || "No categories available."}
-          </Text>
+          <div className={styles.content}>
+            <Text
+              className={styles.title}
+              component="h1"
+              size="text-3xl"
+              weight="bold"
+            >
+              {info.title}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Author: {authors}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Publisher: {publisher}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Published date: {publishedDate}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Number of pages: {pageCount}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Language: {language}
+            </Text>
+            <Text className={styles.description} component="p" size="text-base">
+              {info.description ?? "No description available."}
+            </Text>
+            <Text
+              className={styles.meta}
+              component="p"
+              size="text-sm"
+              weight="medium"
+            >
+              Genre: {categories}
+            </Text>
+            {previewLink ? (
+              <a
+                className={styles.link}
+                href={previewLink}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                Preview
+              </a>
+            ) : null}
+            {pdfDownloadLink ? (
+              <a
+                className={styles.link}
+                href={pdfDownloadLink}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                Download PDF
+              </a>
+            ) : null}
+          </div>
         </section>
       </div>
     </main>

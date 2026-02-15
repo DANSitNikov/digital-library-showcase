@@ -16,10 +16,23 @@ type GoogleBooksVolumeInfo = {
   description?: string;
   imageLinks?: GoogleBooksImageLinks;
   pageCount?: number;
+  language?: string;
+  previewLink?: string;
+  publisher?: string;
   publishedDate?: string;
 };
 
+type GoogleBooksPdfAccess = {
+  downloadLink?: string;
+  isAvailable?: boolean;
+};
+
+type GoogleBooksAccessInfo = {
+  pdf?: GoogleBooksPdfAccess;
+};
+
 export type GoogleBooksVolume = {
+  accessInfo?: GoogleBooksAccessInfo;
   id: string;
   volumeInfo: GoogleBooksVolumeInfo;
 };
@@ -40,14 +53,22 @@ const PAGE_SIZE = 20;
 
 export const getGoogleBooksCover = (
   imageLinks?: GoogleBooksImageLinks,
+  size: "medium" | "small" = "medium",
 ): string | undefined => {
   const raw =
-    imageLinks?.extraLarge ??
-    imageLinks?.large ??
-    imageLinks?.medium ??
-    imageLinks?.small ??
-    imageLinks?.thumbnail ??
-    imageLinks?.smallThumbnail;
+    size === "small"
+      ? (imageLinks?.small ??
+        imageLinks?.smallThumbnail ??
+        imageLinks?.thumbnail ??
+        imageLinks?.medium ??
+        imageLinks?.large ??
+        imageLinks?.extraLarge)
+      : (imageLinks?.medium ??
+        imageLinks?.large ??
+        imageLinks?.extraLarge ??
+        imageLinks?.thumbnail ??
+        imageLinks?.small ??
+        imageLinks?.smallThumbnail);
 
   if (!raw) {
     return undefined;
@@ -76,7 +97,9 @@ export const fetchBooks = async ({
   );
 
   if (!response.ok) {
-    throw new Error(`Google Books request failed with status ${response.status}`);
+    throw new Error(
+      `Google Books request failed with status ${response.status}`,
+    );
   }
 
   const data = (await response.json()) as GoogleBooksSearchResponse;
@@ -89,8 +112,9 @@ export const fetchBooks = async ({
 export const fetchBookById = async (
   id: string,
 ): Promise<GoogleBooksVolume | null> => {
+  const encodedId = encodeURIComponent(id);
   const response = await fetch(
-    `${env.NEXT_PUBLIC_GOOGLE_BOOKS_API_URL}/volumes/${id}`,
+    `${env.NEXT_PUBLIC_GOOGLE_BOOKS_API_URL}/volumes/${encodedId}`,
     {
       next: { revalidate: 3600 },
     },
@@ -101,7 +125,9 @@ export const fetchBookById = async (
   }
 
   if (!response.ok) {
-    throw new Error(`Google Books request failed with status ${response.status}`);
+    throw new Error(
+      `Google Books request failed with status ${response.status}`,
+    );
   }
 
   return (await response.json()) as GoogleBooksVolume;
