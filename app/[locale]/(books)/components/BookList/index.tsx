@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { List } from "react-window";
 import Loader from "@/app/components/ui/Loader";
 import Text from "@/app/components/ui/Text";
-import { useGetBooks } from "@/app/hooks/useGetBooks";
+import { useGetBooks } from "@/app/[locale]/(books)/hooks/useGetBooks";
 import styles from "./BookList.module.scss";
 import BookRow from "./BookRow";
 import type { BookListLabels } from "./BookRow";
@@ -31,7 +31,7 @@ const BookList = ({ listHeight, query }: BookListProps) => {
     isLoading,
   } = useGetBooks({
     enabled: query.length > 0,
-    q: query,
+    query,
   });
   const bookListLabels: BookListLabels = {
     general: tList("general"),

@@ -1,6 +1,8 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import BackButton from "@/app/components/features/BackButton";
 import Button from "@/app/components/ui/Button";
 import Text from "@/app/components/ui/Text";
 import styles from "./error.module.scss";
@@ -12,6 +14,8 @@ type BookErrorPageProps = {
 
 const BookErrorPage = ({ error, reset }: BookErrorPageProps) => {
   const tError = useTranslations("ErrorPage");
+  const params = useParams<{ locale?: string }>();
+  const locale = params?.locale ?? "en";
 
   return (
     <section className={styles.main}>
@@ -21,9 +25,12 @@ const BookErrorPage = ({ error, reset }: BookErrorPageProps) => {
       <Text className={styles.message} component="p" size="text-base">
         {error.message || tError("unknownError")}
       </Text>
-      <Button onClick={reset} type="button">
-        {tError("retry")}
-      </Button>
+      <div className={styles.actions}>
+        <BackButton href={`/${locale}`} />
+        <Button onClick={reset} type="button">
+          {tError("retry")}
+        </Button>
+      </div>
     </section>
   );
 };

@@ -5,23 +5,20 @@ import type { GoogleBooksSearchResponse } from "@/lib/api/googleBooks";
 import { fetchBooks } from "@/lib/api/googleBooks";
 
 type UseGetBooksParams = {
-  q?: string;
+  query: string;
   enabled?: boolean;
 };
 
 const PAGE_SIZE = 20;
 
-export const useGetBooks = ({
-  enabled = true,
-  q = "programming",
-}: UseGetBooksParams = {}) => {
+export const useGetBooks = ({ query, enabled = true }: UseGetBooksParams) => {
   return useInfiniteQuery<GoogleBooksSearchResponse, Error>({
     enabled,
     initialPageParam: 0,
-    queryKey: ["books", q, PAGE_SIZE],
+    queryKey: ["books", query, PAGE_SIZE],
     queryFn: ({ pageParam, signal }) =>
       fetchBooks({
-        q,
+        query,
         signal,
         startIndex: Number(pageParam) || 0,
       }),

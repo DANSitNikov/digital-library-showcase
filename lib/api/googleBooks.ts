@@ -44,7 +44,7 @@ export type GoogleBooksSearchResponse = {
 };
 
 export type FetchBooksParams = {
-  q?: string;
+  query: string;
   startIndex?: number;
   signal?: AbortSignal;
 };
@@ -70,13 +70,13 @@ export const getGoogleBooksCover = (
 };
 
 export const fetchBooks = async ({
-  q = "programming",
+  query,
   startIndex = 0,
   signal,
 }: FetchBooksParams): Promise<GoogleBooksSearchResponse> => {
   const params = new URLSearchParams({
     maxResults: String(PAGE_SIZE),
-    q,
+    q: query,
     startIndex: String(startIndex),
   });
 
@@ -95,6 +95,7 @@ export const fetchBooks = async ({
   }
 
   const data = (await response.json()) as GoogleBooksSearchResponse;
+
   return {
     ...data,
     items: data.items ?? [],
