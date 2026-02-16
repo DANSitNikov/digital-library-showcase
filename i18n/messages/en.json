@@ -1,4 +1,7 @@
 {
+  "Common": {
+    "back": "Back"
+  },
   "Layout": {
     "title": "Digital Library",
     "dataSource": "Data source: Google Books",
@@ -25,6 +28,7 @@
     "list": {
       "loading": "Loading books...",
       "error": "Something went wrong",
+      "empty": "No books found.",
       "loadingMore": "Loading more books...",
       "published": "Published: {value}",
       "unknown": "Unknown",

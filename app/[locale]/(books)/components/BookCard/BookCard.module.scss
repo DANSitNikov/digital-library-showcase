@@ -4,6 +4,7 @@
 }
 
 .card {
+  position: relative;
   display: grid;
   grid-template-columns: 180px 1fr;
   align-items: stretch;
@@ -27,9 +28,20 @@
 }
 
 .link:focus-visible {
-  outline: 2px solid var(--color-blue);
-  outline-offset: 3px;
-  border-radius: var(--radius-xl);
+  outline: none;
+}
+
+.link:focus-visible .card {
+  box-shadow: var(--shadow-xs);
+}
+
+.link:focus-visible .card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color-blue);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .coverWrap {

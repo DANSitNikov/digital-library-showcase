@@ -89,7 +89,7 @@ const BookPage = async ({ params }: BookPageProps) => {
           <div className={styles.content}>
             <Text
               className={styles.title}
-              component="h1"
+              component="h2"
               size="text-3xl"
               weight="bold"
             >
