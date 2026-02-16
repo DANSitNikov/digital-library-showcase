@@ -18,10 +18,20 @@
 - Testing Library
 - JSDOM
 
-## Current Test Types
+## Test Types
 
-- Unit tests for utility and hook logic
-- Integration test for search + list behavior
+- Unit tests
+  - `app/hooks/useDebounce/useDebounce.test.tsx`
+  - `lib/api/googleBooks/googleBooks.test.ts`
+- Integration test
+  - `app/[locale]/(books)/components/Search/Search.test.tsx`
+
+## CI
+
+Tests are executed automatically in GitHub Actions on pull requests
+targeting `main` via:
+
+- `.github/workflows/ci.yml`
 
 ## Run Tests
 
