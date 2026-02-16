@@ -49,3 +49,6 @@ workflow, so each pull request gets an updated Storybook build and URL.
 
 <img width="837" height="455" alt="Screenshot 2026-02-16 at 18 06 33" src="https://github.com/user-attachments/assets/6029585f-bb94-4189-8e60-0bb5eb5ff378" />
 
+<img width="1911" height="1021" alt="Screenshot 2026-02-16 at 21 32 25" src="https://github.com/user-attachments/assets/be21484a-4035-4cda-93ef-2d35aa958439" />
+
+
