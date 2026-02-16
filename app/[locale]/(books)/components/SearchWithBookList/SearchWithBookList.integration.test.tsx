@@ -40,7 +40,7 @@ vi.mock("next-intl", () => ({
         return listMessages[key] ?? key;
       }
 
-      if (namespace === "HomePage.card") {
+      if (namespace === "HomePages.card") {
         const cardMessages: Record<string, string> = {
           authorLabel: "Author",
           genreLabel: "Genre",
