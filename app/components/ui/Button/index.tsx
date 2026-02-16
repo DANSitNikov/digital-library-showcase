@@ -5,7 +5,7 @@ import type { TextSize, TextWeight } from "../Text";
 import styles from "./Button.module.scss";
 
 export type ButtonSize = "sm" | "md" | "lg" | "xl";
-const buttonSizeToTextSize: Record<ButtonSize, TextSize> = {
+const buttonSize: Record<ButtonSize, TextSize> = {
   lg: "text-lg",
   md: "text-base",
   sm: "text-sm",
@@ -20,17 +20,17 @@ export type ButtonProps = ComponentPropsWithRef<"button"> & {
 };
 
 const Button = ({
+  ref,
   children,
   className,
   disabled,
   fullWidth = false,
-  ref,
   size = "md",
   weight = "semibold",
   type = "button",
   ...rest
 }: ButtonProps) => {
-  const resolvedClassName = clsx(
+  const clsxClassName = clsx(
     styles.button,
     styles[size],
     fullWidth && styles.fullWidth,
@@ -39,11 +39,11 @@ const Button = ({
 
   return (
     <Text
-      className={resolvedClassName}
+      className={clsxClassName}
       component="button"
       disabled={disabled}
       ref={ref}
-      size={buttonSizeToTextSize[size]}
+      size={buttonSize[size]}
       weight={weight}
       type={type}
       {...rest}

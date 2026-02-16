@@ -6,23 +6,19 @@ import ArrowBack from "@/app/components/ui/icons/ArrowBack";
 import styles from "./BackButton.module.scss";
 
 export type BackButtonProps = Omit<ButtonProps, "children" | "type"> & {
-  fallbackHref?: string;
-  iconSize?: number | string;
-  label?: string;
+  href?: string;
 };
 
-const BackButton = ({
-  className,
-  fallbackHref = "/",
-  iconSize = 20,
-  label = "Back",
-  ...rest
-}: BackButtonProps) => {
+const BackButton = ({ className, href = "/", ...rest }: BackButtonProps) => {
   return (
-    <Link href={fallbackHref}>
-      <Button className={clsx(styles.backButton, className)} type="button" {...rest}>
-        <ArrowBack className={styles.icon} decorative size={iconSize} />
-        <span className={styles.label}>{label}</span>
+    <Link href={href}>
+      <Button
+        aria-label="Back"
+        className={clsx(styles.backButton, className)}
+        type="button"
+        {...rest}
+      >
+        <ArrowBack className={styles.icon} decorative size={20} />
       </Button>
     </Link>
   );

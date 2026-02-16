@@ -6,7 +6,7 @@ import Search from "../Search";
 import BookList from "../BookList";
 
 const QUERY_STORAGE_KEY = "book-search-query";
-const DEFAULT_QUERY = "programming";
+const DEFAULT_QUERY = "Harry Potter";
 
 const SearchWithBookList = () => {
   const [query, setQuery] = useState(() => {

@@ -74,8 +74,8 @@ const BookPage = async ({ params }: BookPageProps) => {
   const pdfDownloadLink = book.accessInfo?.pdf?.downloadLink;
 
   return (
-    <main className={styles.main}>
-      <BackButton className={styles.backButton} fallbackHref={`/${locale}`} />
+    <section className={styles.main}>
+      <BackButton className={styles.backButton} href={`/${locale}`} />
       <div className={styles.layout}>
         <div className={styles.coverWrap}>
           <Image
@@ -151,14 +151,17 @@ const BookPage = async ({ params }: BookPageProps) => {
           </Text>
           <div className={styles.links}>
             {previewLink ? (
-              <a
+              <Text
                 className={styles.link}
+                component="a"
                 href={previewLink}
                 rel="noreferrer noopener"
+                size="text-sm"
                 target="_blank"
+                weight="medium"
               >
                 {tBook("actions.preview")}
-              </a>
+              </Text>
             ) : null}
             {previewLink && pdfDownloadLink ? (
               <Text
@@ -171,19 +174,22 @@ const BookPage = async ({ params }: BookPageProps) => {
               </Text>
             ) : null}
             {pdfDownloadLink ? (
-              <a
+              <Text
                 className={styles.link}
+                component="a"
                 href={pdfDownloadLink}
                 rel="noreferrer noopener"
+                size="text-sm"
                 target="_blank"
+                weight="medium"
               >
                 {tBook("actions.downloadPdf")}
-              </a>
+              </Text>
             ) : null}
           </div>
         </section>
       </div>
-    </main>
+    </section>
   );
 };
 

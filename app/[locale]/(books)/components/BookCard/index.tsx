@@ -28,6 +28,7 @@ const BookCard = ({
   title,
 }: BookCardProps) => {
   const tCard = useTranslations("HomePage.card");
+
   const card = (
     <article className={styles.card}>
       <div className={styles.coverWrap}>
@@ -41,10 +42,20 @@ const BookCard = ({
         />
       </div>
       <div className={styles.content}>
-        <Text className={styles.title} component="h3" size="text-lg" weight="bold">
+        <Text
+          className={styles.title}
+          component="h3"
+          size="text-lg"
+          weight="bold"
+        >
           {title}
         </Text>
-        <Text className={styles.author} component="p" size="text-sm" weight="medium">
+        <Text
+          className={styles.author}
+          component="p"
+          size="text-sm"
+          weight="medium"
+        >
           {tCard("authorLabel")}: {author}
         </Text>
         <Text className={styles.meta} component="p" size="text-sm">

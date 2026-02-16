@@ -70,9 +70,7 @@ export const Skeleton: Story = {
     },
   },
   render: ({ fullWidth, size }) => (
-    <div style={{ maxWidth: "20rem" }}>
-      <ButtonSkeleton fullWidth={fullWidth} size={size} />
-    </div>
+    <ButtonSkeleton fullWidth={fullWidth} size={size} />
   ),
   args: {
     fullWidth: false,
