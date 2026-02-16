@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import SearchWithBookList from "@/app/[locale]/components/SearchWithBookList";
+import SearchWithBookList from "./components/SearchWithBookList";
 
 type LocalePageProps = {
   params: Promise<{ locale: string }>;

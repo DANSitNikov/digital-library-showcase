@@ -3,13 +3,13 @@
 import { useLocale, useTranslations } from "next-intl";
 import { List } from "react-window";
 import type { RowComponentProps } from "react-window";
-import BookCard from "@/app/[locale]/components/BookCard";
-import BookCardSkeleton from "@/app/[locale]/components/BookCard/BookCardSkeleton";
 import Text from "@/app/component/Text";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
 import type { GoogleBooksVolume } from "@/lib/api/googleBooks";
 import { getGoogleBooksCover } from "@/lib/api/googleBooks";
 import styles from "./BookList.module.scss";
+import BookCard from "../BookCard";
+import BookCardSkeleton from "../BookCard/BookCardSkeleton";
 
 type BookRowProps = {
   books: GoogleBooksVolume[];
@@ -50,7 +50,7 @@ const BookRow = ({
           blurb={listCopy.publishedPattern.replace("{value}", publishedValue)}
           coverImage={coverImage}
           genre={info.categories?.[0] ?? listCopy.general}
-          href={`/${locale}/book/${book.id}`}
+          href={`/${locale}/${book.id}`}
           pages={info.pageCount ?? 0}
           title={info.title}
         />

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import BookList from "@/app/[locale]/components/BookList";
-import Search from "@/app/[locale]/components/Search";
 import { useListHeight } from "./useListHeight";
+import Search from "../Search";
+import BookList from "../BookList";
 
 const SearchWithBookList = () => {
   const [query, setQuery] = useState("programming");
