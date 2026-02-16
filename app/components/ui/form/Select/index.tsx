@@ -49,13 +49,13 @@ export type SelectProps = Omit<
 const Select = ({
   error,
   label,
-  labelMode = "visible",
   name,
   options,
   className,
   disabled,
   size = "md",
   weight = "regular",
+  labelMode = "visible",
   ...rest
 }: SelectProps) => {
   const { field, fieldState } = useController({ name });
@@ -68,9 +68,6 @@ const Select = ({
     field.onChange(
       isNumericOptions ? Number(event.target.value) : event.target.value,
     );
-  };
-  const handleBlur: ComponentPropsWithRef<"select">["onBlur"] = () => {
-    field.onBlur();
   };
 
   return (
@@ -101,7 +98,6 @@ const Select = ({
             hasError && styles.invalid,
             className,
           )}
-          onBlur={handleBlur}
           onChange={handleChange}
           size={selectSizeToTextSize[size]}
           value={field.value != null ? String(field.value) : ""}

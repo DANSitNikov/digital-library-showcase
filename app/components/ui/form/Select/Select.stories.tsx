@@ -82,12 +82,15 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<SelectStoryArgs>;
+type SelectSkeletonStoryArgs = SelectStoryArgs & {
+  showLabel?: boolean;
+};
 
 export const Playground: Story = {
   render: (args) => <SelectPlayground {...args} />,
 };
 
-export const Skeleton: Story = {
+export const Skeleton: StoryObj<SelectSkeletonStoryArgs> = {
   argTypes: {
     disabled: {
       control: false,
@@ -113,10 +116,16 @@ export const Skeleton: Story = {
       control: false,
       table: { disable: true },
     },
+    showLabel: {
+      control: "boolean",
+    },
   },
-  render: ({ size }) => (
+  render: ({ showLabel = true, size }) => (
     <div style={{ maxWidth: "28rem" }}>
-      <SelectSkeleton showLabel={false} size={size} />
+      <SelectSkeleton showLabel={showLabel} size={size} />
     </div>
   ),
+  args: {
+    showLabel: true,
+  },
 };
