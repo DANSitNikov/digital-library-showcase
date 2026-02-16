@@ -32,3 +32,8 @@
 ## Validation
 
 I tested the app with Lighthouse and provide screenshots below.
+
+<img width="1912" height="634" alt="Screenshot 2026-02-16 at 20 56 13" src="https://github.com/user-attachments/assets/d3642f56-2802-4830-8ab3-28ccfa6ed57e" />
+
+<img width="1817" height="854" alt="Screenshot 2026-02-16 at 21 13 43" src="https://github.com/user-attachments/assets/ab7cd4cc-a5b0-4fed-bcb9-b28bf3b4b977" />
+
