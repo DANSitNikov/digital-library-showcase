@@ -12,6 +12,19 @@
 
 # Security
 
+## App Security Headers
+
+XSS and clickjacking protections are configured in:
+
+- `next.config.ts`
+
+Current headers include:
+
+- `Content-Security-Policy` (XSS risk reduction and safer resource loading)
+- `X-Frame-Options: DENY` (clickjacking protection)
+- `X-Content-Type-Options: nosniff`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+
 ## Environment Variables
 
 - Store local config in `.env.local`
