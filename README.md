@@ -56,7 +56,15 @@ docker compose up --build
 
 ### Desktop
 
+<img width="1633" height="1040" alt="Screenshot 2026-02-16 at 20 44 50" src="https://github.com/user-attachments/assets/e4c5eeaa-350c-4d05-87a7-8c2fe6e0a84f" />
 
+<img width="1645" height="1040" alt="Screenshot 2026-02-16 at 20 45 08" src="https://github.com/user-attachments/assets/d87e0610-f7f7-4ada-90ab-32325b91be33" />
 
 ### Mobile
+
+<img width="990" height="820" alt="Screenshot 2026-02-16 at 20 45 29" src="https://github.com/user-attachments/assets/e8a584f4-36af-47c3-b93a-195687246a8a" />
+
+<img width="1000" height="810" alt="Screenshot 2026-02-16 at 20 45 38" src="https://github.com/user-attachments/assets/a557f8b9-8de5-4fed-b981-aa84cdb5f32b" />
+
+
 
