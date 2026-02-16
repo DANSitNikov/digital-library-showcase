@@ -7,7 +7,7 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import { notFound } from "next/navigation";
-import Text from "@/app/component/Text";
+import Text from "@/app/components/Text";
 import { routing } from "@/i18n/routing";
 import styles from "./layout.module.scss";
 import LocaleSelect from "./components/LocaleSelect";

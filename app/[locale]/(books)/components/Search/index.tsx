@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
-import Input from "@/app/component/form/Input";
+import Input from "@/app/components/form/Input";
 import { useDebounce } from "@/app/hooks/useDebounce";
 
 type SearchFormValues = {

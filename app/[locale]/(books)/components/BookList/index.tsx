@@ -3,7 +3,8 @@
 import { useLocale, useTranslations } from "next-intl";
 import { List } from "react-window";
 import type { RowComponentProps } from "react-window";
-import Text from "@/app/component/Text";
+import Loader from "@/app/components/Loader";
+import Text from "@/app/components/Text";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
 import type { GoogleBooksVolume } from "@/lib/api/googleBooks";
 import { getGoogleBooksCover } from "@/lib/api/googleBooks";
@@ -130,9 +131,7 @@ const BookList = ({ listHeight, query }: BookListProps) => {
       ) : null}
       {isFetchingNextPage ? (
         <div className={styles.loadingMore}>
-          <Text component="p" size="text-sm">
-            {tList("loadingMore")}
-          </Text>
+          <Loader label={tList("loadingMore")} />
         </div>
       ) : null}
     </>

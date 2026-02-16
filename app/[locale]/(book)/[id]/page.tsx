@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import Text from "@/app/component/Text";
+import Text from "@/app/components/Text";
 import { fetchBookById, getGoogleBooksCover } from "@/lib/api/googleBooks";
 import styles from "./page.module.scss";
 

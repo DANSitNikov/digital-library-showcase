@@ -1,4 +1,4 @@
-import InputSkeleton from "@/app/component/form/Input/InputSkeleton";
+import InputSkeleton from "@/app/components/form/Input/InputSkeleton";
 import styles from "./loading.module.scss";
 import BookCardSkeleton from "./components/BookCard/BookCardSkeleton";
 

@@ -5,7 +5,7 @@ import type { ImageProps } from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { memo } from "react";
-import Text from "@/app/component/Text";
+import Text from "@/app/components/Text";
 import styles from "./BookCard.module.scss";
 
 export type BookCardProps = {

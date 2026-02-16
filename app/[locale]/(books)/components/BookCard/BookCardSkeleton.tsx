@@ -1,4 +1,4 @@
-import Skeleton from "@/app/component/Skeleton";
+import Skeleton from "@/app/components/Skeleton";
 import styles from "./BookCardSkeleton.module.scss";
 
 const BookCardSkeleton = () => {
