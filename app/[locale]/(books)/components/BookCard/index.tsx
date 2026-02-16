@@ -44,7 +44,7 @@ const BookCard = ({
       <div className={styles.content}>
         <Text
           className={styles.title}
-          component="h3"
+          component="h2"
           size="text-lg"
           weight="bold"
         >

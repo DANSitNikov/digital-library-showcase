@@ -28,6 +28,7 @@
     "list": {
       "loading": "Buecher werden geladen...",
       "error": "Etwas ist schiefgelaufen",
+      "empty": "Keine Buecher gefunden.",
       "loadingMore": "Weitere Buecher werden geladen...",
       "published": "Veroeffentlicht: {value}",
       "unknown": "Unbekannt",

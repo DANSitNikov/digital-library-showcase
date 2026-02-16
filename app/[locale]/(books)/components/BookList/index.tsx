@@ -43,6 +43,8 @@ const BookList = ({ listHeight, query }: BookListProps) => {
   const books = data?.pages.flatMap((page) => page.items ?? []) ?? [];
   const showInitialSkeletons =
     !isError && books.length === 0 && (isLoading || isFetching);
+  const showEmptyState =
+    !isError && !showInitialSkeletons && books.length === 0 && query.length > 0;
   const handleRowsRendered = (visibleRows: {
     startIndex: number;
     stopIndex: number;
@@ -85,6 +87,10 @@ const BookList = ({ listHeight, query }: BookListProps) => {
           className={styles.list}
           style={{ height: listHeight }}
         />
+      ) : showEmptyState ? (
+        <div className={styles.status}>
+          <Text component="p">{tList("empty")}</Text>
+        </div>
       ) : null}
       {isFetchingNextPage ? (
         <div className={styles.loadingMore}>

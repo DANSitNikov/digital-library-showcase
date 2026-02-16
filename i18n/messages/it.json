@@ -28,6 +28,7 @@
     "list": {
       "loading": "Caricamento libri...",
       "error": "Qualcosa e andato storto",
+      "empty": "Nessun libro trovato.",
       "loadingMore": "Caricamento altri libri...",
       "published": "Pubblicato: {value}",
       "unknown": "Sconosciuto",
