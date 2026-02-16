@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import Text from "@/app/components/Text";
+import BackButton from "@/app/components/features/BackButton";
+import Text from "@/app/components/ui/Text";
 import { fetchBookById, getGoogleBooksCover } from "@/lib/api/googleBooks";
 import styles from "./page.module.scss";
 
@@ -74,6 +75,7 @@ const BookPage = async ({ params }: BookPageProps) => {
 
   return (
     <main className={styles.main}>
+      <BackButton className={styles.backButton} fallbackHref={`/${locale}`} />
       <div className={styles.layout}>
         <div className={styles.coverWrap}>
           <Image

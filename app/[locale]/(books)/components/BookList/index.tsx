@@ -3,8 +3,8 @@
 import { useLocale, useTranslations } from "next-intl";
 import { List } from "react-window";
 import type { RowComponentProps } from "react-window";
-import Loader from "@/app/components/Loader";
-import Text from "@/app/components/Text";
+import Loader from "@/app/components/ui/Loader";
+import Text from "@/app/components/ui/Text";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
 import type { GoogleBooksVolume } from "@/lib/api/googleBooks";
 import { getGoogleBooksCover } from "@/lib/api/googleBooks";
