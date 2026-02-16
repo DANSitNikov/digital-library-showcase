@@ -23,7 +23,7 @@
     "search": {
       "label": "Cerca libri",
       "placeholder": "Harry Potter",
-      "validationMin": "Inserisci almeno 3 caratteri"
+      "validationMin": "Inserisci almeno 2 caratteri"
     },
     "list": {
       "loading": "Caricamento libri...",

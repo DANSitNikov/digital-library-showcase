@@ -82,6 +82,7 @@ const BookPage = async ({ params }: BookPageProps) => {
             alt={`Cover of ${info.title}`}
             className={styles.cover}
             fill
+            sizes="(max-width: 600px) 220px, 240px"
             src={coverImage}
           />
         </div>
