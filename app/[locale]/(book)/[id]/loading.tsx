@@ -1,5 +1,5 @@
-import Skeleton from "@/app/component/Skeleton";
-import TextSkeleton from "@/app/component/Text/TextSkeleton";
+import Skeleton from "@/app/components/ui/Skeleton";
+import TextSkeleton from "@/app/components/ui/Text/TextSkeleton";
 import styles from "./page.module.scss";
 
 const BookLoadingPage = () => {

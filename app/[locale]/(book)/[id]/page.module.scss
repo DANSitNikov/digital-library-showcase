@@ -5,6 +5,10 @@
   padding: var(--space-6);
 }
 
+.backButton {
+  margin-bottom: var(--space-4);
+}
+
 .layout {
   display: grid;
   grid-template-columns: 240px 1fr;

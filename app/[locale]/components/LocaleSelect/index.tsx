@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
-import Select from "@/app/component/form/Select";
+import Select from "@/app/components/ui/form/Select";
 import type { AppLocale } from "@/i18n/locales";
 import { locales } from "@/i18n/locales";
 

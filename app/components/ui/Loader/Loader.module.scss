@@ -1,0 +1,22 @@
+.loader {
+  --loader-size: 1.5rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--loader-size);
+  height: var(--loader-size);
+  color: var(--color-blue);
+}
+
+.icon {
+  display: block;
+  transform-origin: center;
+  animation: loader-spin 0.7s linear infinite;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
