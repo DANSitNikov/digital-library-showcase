@@ -27,7 +27,7 @@ export type TextBaseProps<C extends ElementType = "span"> = {
 export type TextProps<C extends ElementType> = TextBaseProps<C> &
   Omit<ComponentPropsWithRef<C>, keyof TextBaseProps<C>>;
 
-const textSizeInRem: Record<TextSize, string> = {
+const textSize: Record<TextSize, string> = {
   "text-xs": "0.75rem",
   "text-sm": "0.875rem",
   "text-base": "1rem",
@@ -41,7 +41,7 @@ const textSizeInRem: Record<TextSize, string> = {
   "text-7xl": "4.5rem",
 };
 
-const textLineHeightInRem: Record<TextSize, string> = {
+const textLineHeight: Record<TextSize, string> = {
   "text-2xl": "2rem",
   "text-3xl": "2.25rem",
   "text-4xl": "2.5rem",
@@ -55,7 +55,7 @@ const textLineHeightInRem: Record<TextSize, string> = {
   "text-xs": "1rem",
 };
 
-const textWeightValue: Record<TextWeight, number> = {
+const textWeight: Record<TextWeight, number> = {
   regular: 400,
   medium: 500,
   semibold: 600,
@@ -63,11 +63,11 @@ const textWeightValue: Record<TextWeight, number> = {
 };
 
 const Text = <C extends ElementType>({
+  ref,
+  style,
   children,
   className,
   component,
-  ref,
-  style,
   size = "text-base",
   weight = "regular",
   ...rest
@@ -80,9 +80,9 @@ const Text = <C extends ElementType>({
       className,
       style: {
         ...style,
-        fontSize: textSizeInRem[size],
-        lineHeight: textLineHeightInRem[size],
-        fontWeight: textWeightValue[weight],
+        fontSize: textSize[size],
+        lineHeight: textLineHeight[size],
+        fontWeight: textWeight[weight],
       },
     },
     children,
