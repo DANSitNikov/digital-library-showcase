@@ -8,7 +8,7 @@ export type ButtonSkeletonProps = {
   width?: CSSProperties["width"];
 };
 
-const buttonHeightBySize: Record<ButtonSize, CSSProperties["height"]> = {
+const skeletonHeight: Record<ButtonSize, CSSProperties["height"]> = {
   lg: "var(--space-12)",
   md: "var(--space-10)",
   sm: "var(--space-8)",
@@ -16,13 +16,13 @@ const buttonHeightBySize: Record<ButtonSize, CSSProperties["height"]> = {
 };
 
 const ButtonSkeleton = ({
-  fullWidth = false,
   size = "md",
   width = "8rem",
+  fullWidth = false,
 }: ButtonSkeletonProps) => {
   return (
     <Skeleton
-      height={buttonHeightBySize[size]}
+      height={skeletonHeight[size]}
       style={{ borderRadius: "var(--radius-lg)" }}
       width={fullWidth ? "100%" : width}
     />
