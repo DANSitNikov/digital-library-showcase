@@ -75,7 +75,7 @@ const BookPage = async ({ params }: BookPageProps) => {
 
   return (
     <main className={styles.main}>
-      <BackButton className={styles.backButton} fallbackHref={`/${locale}`} />
+      <BackButton className={styles.backButton} href={`/${locale}`} />
       <div className={styles.layout}>
         <div className={styles.coverWrap}>
           <Image

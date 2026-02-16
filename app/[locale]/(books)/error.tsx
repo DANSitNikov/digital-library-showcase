@@ -1,6 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Button from "@/app/components/ui/Button";
+import Text from "@/app/components/ui/Text";
+import styles from "./error.module.scss";
 
 type LocaleErrorPageProps = {
   error: Error;
@@ -11,15 +14,17 @@ const LocaleErrorPage = ({ error, reset }: LocaleErrorPageProps) => {
   const tError = useTranslations("ErrorPage");
 
   return (
-    <main style={{ margin: "0 auto", maxWidth: "960px", padding: "2rem" }}>
-      <h2>{tError("pageTitle")}</h2>
-      <p style={{ marginTop: "0.5rem" }}>
+    <section className={styles.main}>
+      <Text component="h2" size="text-2xl" weight="bold">
+        {tError("pageTitle")}
+      </Text>
+      <Text className={styles.message} component="p" size="text-base">
         {error.message || tError("unknownError")}
-      </p>
-      <button onClick={reset} style={{ marginTop: "1rem" }} type="button">
+      </Text>
+      <Button onClick={reset} type="button">
         {tError("retry")}
-      </button>
-    </main>
+      </Button>
+    </section>
   );
 };
 

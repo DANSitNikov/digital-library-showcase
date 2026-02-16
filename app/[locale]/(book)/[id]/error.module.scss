@@ -1,0 +1,23 @@
+.main {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-6);
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.message {
+  margin: 0;
+  color: var(--color-black-soft);
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: var(--space-4);
+  }
+}
