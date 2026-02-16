@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import Input from "@/app/components/ui/form/Input";
-import { useDebounce } from "@/app/hooks/useDebounce";
+import useDebounce from "@/app/hooks/useDebounce";
 
 type SearchFormValues = {
   query: string;
