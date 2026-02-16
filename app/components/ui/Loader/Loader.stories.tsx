@@ -4,9 +4,7 @@ import Loader from "./index";
 const meta = {
   title: "Components/Loader",
   component: Loader,
-  args: {
-    label: "Loading",
-  },
+  args: {},
 } satisfies Meta<typeof Loader>;
 
 export default meta;
