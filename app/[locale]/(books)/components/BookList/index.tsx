@@ -131,7 +131,7 @@ const BookList = ({ listHeight, query }: BookListProps) => {
       ) : null}
       {isFetchingNextPage ? (
         <div className={styles.loadingMore}>
-          <Loader label={tList("loadingMore")} />
+          <Loader />
         </div>
       ) : null}
     </>
