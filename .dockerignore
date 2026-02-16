@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.github
+.env*
+!.env.example
+build-storybook.log
+npm-debug.log*
+.DS_Store
