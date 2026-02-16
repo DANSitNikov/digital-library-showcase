@@ -8,9 +8,9 @@ import {
 } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Text from "@/app/component/Text";
-import LocaleSelect from "@/app/[locale]/components/LocaleSelect";
 import { routing } from "@/i18n/routing";
 import styles from "./layout.module.scss";
+import LocaleSelect from "./components/LocaleSelect";
 
 type LocaleLayoutProps = {
   children: ReactNode;

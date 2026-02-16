@@ -3,6 +3,7 @@ import Skeleton from "../../Skeleton";
 import type { SelectSize } from "./index";
 
 export type SelectSkeletonProps = {
+  showLabel?: boolean;
   size?: SelectSize;
   width?: CSSProperties["width"];
 };
@@ -14,7 +15,11 @@ const selectHeightBySize: Record<SelectSize, CSSProperties["height"]> = {
   xl: "var(--space-16)",
 };
 
-const SelectSkeleton = ({ size = "md", width = "100%" }: SelectSkeletonProps) => {
+const SelectSkeleton = ({
+  showLabel = true,
+  size = "md",
+  width = "100%",
+}: SelectSkeletonProps) => {
   return (
     <div
       style={{
@@ -24,11 +29,13 @@ const SelectSkeleton = ({ size = "md", width = "100%" }: SelectSkeletonProps) =>
         width,
       }}
     >
-      <Skeleton
-        height="1rem"
-        style={{ borderRadius: "var(--radius-sm)" }}
-        width="35%"
-      />
+      {showLabel ? (
+        <Skeleton
+          height="1rem"
+          style={{ borderRadius: "var(--radius-sm)" }}
+          width="35%"
+        />
+      ) : null}
       <Skeleton
         height={selectHeightBySize[size]}
         style={{ borderRadius: "var(--radius-md)" }}
