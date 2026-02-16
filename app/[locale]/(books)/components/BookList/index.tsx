@@ -2,26 +2,13 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { List } from "react-window";
-import type { RowComponentProps } from "react-window";
 import Loader from "@/app/components/ui/Loader";
 import Text from "@/app/components/ui/Text";
 import { useGetBooks } from "@/app/hooks/useGetBooks";
-import type { GoogleBooksVolume } from "@/lib/api/googleBooks";
-import { getGoogleBooksCover } from "@/lib/api/googleBooks";
 import styles from "./BookList.module.scss";
-import BookCard from "../BookCard";
+import BookRow from "./BookRow";
+import type { BookListLabels } from "./BookRow";
 import BookCardSkeleton from "../BookCard/BookCardSkeleton";
-
-type BookRowProps = {
-  books: GoogleBooksVolume[];
-  locale: string;
-  listCopy: {
-    general: string;
-    publishedPattern: string;
-    unknown: string;
-    unknownAuthor: string;
-  };
-};
 
 type BookListProps = {
   query: string;
@@ -29,36 +16,6 @@ type BookListProps = {
 };
 
 const ROW_HEIGHT = 212;
-
-const BookRow = ({
-  index,
-  style,
-  books,
-  locale,
-  listCopy,
-}: RowComponentProps<BookRowProps>) => {
-  const book = books[index];
-  const info = book.volumeInfo;
-  const coverImage =
-    getGoogleBooksCover(info.imageLinks) ?? "/bookPlaceholder.svg";
-  const publishedValue = info.publishedDate ?? listCopy.unknown;
-
-  return (
-    <div className={styles.row} style={style}>
-      <div className={styles.rowInner}>
-        <BookCard
-          author={info.authors?.[0] ?? listCopy.unknownAuthor}
-          blurb={listCopy.publishedPattern.replace("{value}", publishedValue)}
-          coverImage={coverImage}
-          genre={info.categories?.[0] ?? listCopy.general}
-          href={`/${locale}/${book.id}`}
-          pages={info.pageCount ?? 0}
-          title={info.title}
-        />
-      </div>
-    </div>
-  );
-};
 
 const BookList = ({ listHeight, query }: BookListProps) => {
   const locale = useLocale();
@@ -76,7 +33,7 @@ const BookList = ({ listHeight, query }: BookListProps) => {
     enabled: query.length > 0,
     q: query,
   });
-  const listCopy = {
+  const bookListLabels: BookListLabels = {
     general: tList("general"),
     publishedPattern: tList("published", { value: "{value}" }),
     unknown: tList("unknown"),
@@ -101,13 +58,13 @@ const BookList = ({ listHeight, query }: BookListProps) => {
 
   return (
     <>
-      <div className={styles.status}>
-        {isError ? (
+      {isError ? (
+        <div className={styles.status}>
           <Text component="p">
             {(error as Error)?.message || tList("error")}
           </Text>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
       {showInitialSkeletons ? (
         <div className={styles.skeletons}>
           <BookCardSkeleton />
@@ -124,7 +81,7 @@ const BookList = ({ listHeight, query }: BookListProps) => {
           rowComponent={BookRow}
           rowCount={books.length}
           rowHeight={ROW_HEIGHT}
-          rowProps={{ books, listCopy, locale }}
+          rowProps={{ books, bookListLabels, locale }}
           className={styles.list}
           style={{ height: listHeight }}
         />
