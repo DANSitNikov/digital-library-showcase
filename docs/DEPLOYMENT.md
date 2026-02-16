@@ -1,7 +1,5 @@
 # Deployment
 
-## Docs Navigation
-
 - [README](../README.md)
 - [API](./API.md)
 - [I18N](./I18N.md)
