@@ -1,26 +1,31 @@
+ "use client";
+
 import clsx from "clsx";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import Button from "@/app/components/ui/Button";
 import type { ButtonProps } from "@/app/components/ui/Button";
 import ArrowBack from "@/app/components/ui/icons/ArrowBack";
 import styles from "./BackButton.module.scss";
 
-export type BackButtonProps = Omit<ButtonProps, "children" | "type"> & {
+export type BackButtonProps = Omit<ButtonProps, "children" | "onClick" | "type"> & {
   href?: string;
 };
 
 const BackButton = ({ className, href = "/", ...rest }: BackButtonProps) => {
+  const router = useRouter();
+  const tCommon = useTranslations("Common");
+
   return (
-    <Link href={href}>
-      <Button
-        aria-label="Back"
-        className={clsx(styles.backButton, className)}
-        type="button"
-        {...rest}
-      >
-        <ArrowBack className={styles.icon} decorative size={20} />
-      </Button>
-    </Link>
+    <Button
+      aria-label={tCommon("back")}
+      className={clsx(styles.backButton, className)}
+      onClick={() => router.push(href)}
+      type="button"
+      {...rest}
+    >
+      <ArrowBack className={styles.icon} decorative size={20} />
+    </Button>
   );
 };
 

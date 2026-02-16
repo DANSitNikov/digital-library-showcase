@@ -1,4 +1,7 @@
 {
+  "Common": {
+    "back": "Back"
+  },
   "Layout": {
     "title": "Digital Library",
     "dataSource": "Data source: Google Books",

@@ -39,6 +39,14 @@ const Search = ({ onQueryChange, query }: SearchProps) => {
   const isValidSearch = form.formState.isValid && debouncedQuery.length > 0;
 
   useEffect(() => {
+    if (form.getValues("query") === query) {
+      return;
+    }
+
+    form.reset({ query });
+  }, [form, query]);
+
+  useEffect(() => {
     onQueryChange(isValidSearch ? debouncedQuery : "");
   }, [debouncedQuery, isValidSearch, onQueryChange]);
 

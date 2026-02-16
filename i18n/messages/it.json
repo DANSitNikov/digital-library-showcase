@@ -1,4 +1,7 @@
 {
+  "Common": {
+    "back": "Indietro"
+  },
   "Layout": {
     "title": "Biblioteca Digitale",
     "dataSource": "Fonte dati: Google Books",

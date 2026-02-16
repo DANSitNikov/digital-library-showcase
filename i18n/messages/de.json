@@ -1,4 +1,7 @@
 {
+  "Common": {
+    "back": "Zurueck"
+  },
   "Layout": {
     "title": "Digitale Bibliothek",
     "dataSource": "Datenquelle: Google Books",
