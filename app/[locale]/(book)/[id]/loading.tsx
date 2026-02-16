@@ -4,7 +4,7 @@ import styles from "./page.module.scss";
 
 const BookLoadingPage = () => {
   return (
-    <main className={styles.main}>
+    <section className={styles.main}>
       <div className={styles.layout}>
         <div className={styles.coverWrap}>
           <Skeleton height="100%" width="100%" />
@@ -30,7 +30,7 @@ const BookLoadingPage = () => {
           </div>
         </section>
       </div>
-    </main>
+    </section>
   );
 };
 
