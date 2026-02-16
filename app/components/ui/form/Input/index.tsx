@@ -9,7 +9,7 @@ import Error from "../Error";
 import styles from "./Input.module.scss";
 
 export type InputSize = "sm" | "md" | "lg" | "xl";
-const inputSizeToTextSize: Record<InputSize, TextSize> = {
+const inputSize: Record<InputSize, TextSize> = {
   lg: "text-lg",
   md: "text-base",
   sm: "text-sm",
@@ -74,7 +74,7 @@ const Input = ({
           hasError && styles.invalid,
           className,
         )}
-        size={inputSizeToTextSize[size]}
+        size={inputSize[size]}
         type={type}
         weight={weight}
         {...field}
