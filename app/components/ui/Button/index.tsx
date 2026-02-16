@@ -48,7 +48,7 @@ const Button = ({
       type={type}
       {...rest}
     >
-      {children}
+      {children} test
     </Text>
   );
 };
