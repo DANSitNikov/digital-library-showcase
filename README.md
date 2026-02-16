@@ -7,7 +7,6 @@
 
 ## Documentation
 
-- Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - API: [docs/API.md](docs/API.md)
 - Internationalization: [docs/I18N.md](docs/I18N.md)
 - Components: [docs/COMPONENTS.md](docs/COMPONENTS.md)
@@ -60,5 +59,4 @@ docker compose up --build
 
 
 ### Mobile
-
 

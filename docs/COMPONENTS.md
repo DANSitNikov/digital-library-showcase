@@ -1,4 +1,27 @@
+# Documentation
+
+- [README](../README.md)
+- [API](./API.md)
+- [I18N](./I18N.md)
+- [Performance](./PERFORMANCE.md)
+- [Accessibility](./A11Y.md)
+- [Testing](./TESTING.md)
+- [Security](./SECURITY.md)
+- [Deployment](./DEPLOYMENT.md)
+- [Tech Stack](./TECH_STACK.md)
+
 # Components
+
+## Design Approach
+
+Most of the time, I use Atomic Design as a base for building a component
+library:
+[Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/chapter-2/).
+
+For this test project, I simplified the structure and kept a practical
+split into reusable UI components and app-level feature components.
+For a larger production app, this structure can be expanded into
+atoms, molecules, organisms, and templates.
 
 ## Layers
 
@@ -15,3 +38,11 @@
 ## Feature Components
 
 - `BackButton`
+
+## Documentation And Delivery
+
+I use Storybook to document the component library, so team members can
+quickly see available components, states, and usage examples.
+
+Storybook is deployed with Chromatic and integrated with GitHub PR
+workflow, so each pull request gets an updated Storybook build and URL.
