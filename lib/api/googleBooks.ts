@@ -55,12 +55,12 @@ export const getGoogleBooksCover = (
   imageLinks?: GoogleBooksImageLinks,
 ): string | undefined => {
   const raw =
+    imageLinks?.thumbnail ??
+    imageLinks?.smallThumbnail ??
+    imageLinks?.small ??
     imageLinks?.medium ??
     imageLinks?.large ??
-    imageLinks?.extraLarge ??
-    imageLinks?.thumbnail ??
-    imageLinks?.small ??
-    imageLinks?.smallThumbnail;
+    imageLinks?.extraLarge;
 
   if (!raw) {
     return undefined;

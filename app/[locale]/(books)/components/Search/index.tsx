@@ -26,7 +26,7 @@ const Search = ({ onQueryChange, query }: SearchProps) => {
     mode: "onChange",
     resolver: zodResolver(
       z.object({
-        query: z.string().trim().min(3, tSearch("validationMin")),
+        query: z.string().trim().min(2, tSearch("validationMin")),
       }),
     ),
   });

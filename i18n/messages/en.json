@@ -23,7 +23,7 @@
     "search": {
       "label": "Search for books",
       "placeholder": "Harry Potter",
-      "validationMin": "Enter at least 3 characters"
+      "validationMin": "Enter at least 2 characters"
     },
     "list": {
       "loading": "Loading books...",
