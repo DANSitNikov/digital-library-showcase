@@ -46,3 +46,6 @@ quickly see available components, states, and usage examples.
 
 Storybook is deployed with Chromatic and integrated with GitHub PR
 workflow, so each pull request gets an updated Storybook build and URL.
+
+<img width="837" height="455" alt="Screenshot 2026-02-16 at 18 06 33" src="https://github.com/user-attachments/assets/6029585f-bb94-4189-8e60-0bb5eb5ff378" />
+
