@@ -15,6 +15,7 @@
 - Testing: [docs/TESTING.md](docs/TESTING.md)
 - Security: [docs/SECURITY.md](docs/SECURITY.md)
 - Deployment: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+- Tech Stack: [docs/TECH_STACK.md](docs/TECH_STACK.md)
 
 ## Run The App
 
