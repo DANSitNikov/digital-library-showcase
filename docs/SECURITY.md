@@ -28,7 +28,6 @@ Current headers include:
 ## Environment Variables
 
 - Store local config in `.env.local`
-- Keep real secrets out of git (except intentionally shared test-only values)
 
 ## External Requests
 
