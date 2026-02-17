@@ -40,6 +40,7 @@ const BookRow = ({
           genre={info.categories?.[0] ?? bookListLabels.general}
           href={`/${locale}/${book.id}`}
           pages={info.pageCount ?? 0}
+          priority={index === 0}
           title={info.title}
         />
       </div>

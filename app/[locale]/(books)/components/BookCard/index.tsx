@@ -16,6 +16,7 @@ export type BookCardProps = {
   pages: number;
   genre: string;
   href?: string;
+  priority?: boolean;
 };
 
 const BookCard = ({
@@ -25,6 +26,7 @@ const BookCard = ({
   genre,
   href,
   pages,
+  priority = false,
   title,
 }: BookCardProps) => {
   const tCard = useTranslations("HomePage.card");
@@ -36,7 +38,9 @@ const BookCard = ({
           alt={`Cover of ${title}`}
           className={styles.cover}
           fill
-          loading="lazy"
+          fetchPriority={priority ? "high" : undefined}
+          loading={priority ? "eager" : "lazy"}
+          priority={priority}
           sizes="(max-width: 600px) 120px, 180px"
           src={coverImage}
         />
