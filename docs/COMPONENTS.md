@@ -45,7 +45,7 @@ I use Storybook to document the component library, so team members can
 quickly see available components, states, and usage examples.
 
 Storybook is deployed with Chromatic and integrated with GitHub PR
-workflow, so each pull request gets an updated Storybook build and URL.
+workflow, so each pull request gets an updated Storybook build and URL. Chromatic: https://6992ba4cbddef535264b63e4-bkciotodmw.chromatic.com/
 
 <img width="837" height="455" alt="Screenshot 2026-02-16 at 18 06 33" src="https://github.com/user-attachments/assets/6029585f-bb94-4189-8e60-0bb5eb5ff378" />
 
