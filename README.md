@@ -3,7 +3,7 @@
 ## Links
 
 - App: https://digital-library-showcase.vercel.app/en
-- Components (Chromatic): https://6992ba4cbddef535264b63e4-wucxhqivxa.chromatic.com/
+- Components (Chromatic): https://6992ba4cbddef535264b63e4-bkciotodmw.chromatic.com/
 
 ## Documentation
 
