@@ -30,7 +30,7 @@ atoms, molecules, organisms, and templates.
 
 ## UI Groups
 
-- Typography: `Text`, `TextSkeleton`
+- Typography: `Text`
 - Primitives: `Button`, `Loader`, `Skeleton`
 - Forms: `Input`, `Select`, `Error` and skeleton variants
 - Icons: `ArrowBack`, `KeyboardArrowDown`, `Sync`
